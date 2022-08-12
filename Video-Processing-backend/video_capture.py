@@ -92,24 +92,26 @@ class Mode:
 
     def Video(path):
         while(True):
-            
-            ret, frame = path.read()
-            file = NamedTemporaryFile(suffix=".jpg",prefix="./frame_",delete=True)
-            cv2.imwrite(file.name, frame)
-            ret = qr_detector.detect(file.name, frame)
-            qr_detector.show('frame',frame)
-            if len(ret)>=1:
-                for i in ret:
-                    if i not in c and len(i)== 44:
-                        c.append(i)
-                        print(c)
-                    else:
-                        pass
-            
-            #print(ret)
-            file.close()
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+            try:
+                ret, frame = path.read()
+                file = NamedTemporaryFile(suffix=".jpg",prefix="./frame_",delete=True)
+                cv2.imwrite(file.name, frame)
+                ret = qr_detector.detect(file.name, frame)
+                qr_detector.show('frame',frame)
+                if len(ret)>=1:
+                    for i in ret:
+                        if i not in c and len(i)== 44:
+                            c.append(i)
+                            print(c)
+                        else:
+                            pass
+                
+                #print(ret)
+                file.close()
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+            except Exception as e:  # Si hay una excepcion, muestra cual es 🤔
+                print(e)
 c = []
 video = True
 input_video = cv2.VideoCapture(0)
