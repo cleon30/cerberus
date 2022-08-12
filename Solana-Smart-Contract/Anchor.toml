@@ -1,0 +1,18 @@
+[features]
+seeds = false
+[programs.devnet]
+whitelist = "4C8szhGMKF9GYxRxAtyyXYS9BCX6uqVdsVeECEmV6Lgp"
+counter = "BZnq2ka3aWDe2T9Hi4V5qJYWyTgdKuJjY31RxvHwdAwm"
+minter = "GkgU4ghPP4zkG53Q9zcqD1z8b1otLFhjvBvRQiXyUwFC"
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+whitelist = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/whitelist.ts"
+counter = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/counter.ts"
+minter = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/minter.ts"
