@@ -1,5 +1,6 @@
-#from this import d
+#0xCleon
 
+import json
 from operator import truediv
 import cv2 as cv
 import numpy as np
@@ -80,13 +81,10 @@ class qr_detector:
         #qr_detector.show(self, frame)
         return array
 
-    net = cv.dnn.readNetFromDarknet('yolov4-tiny-custom-640.cfg', 'backup/yolov4-tiny-custom-640_last.weights')
+    net = cv.dnn.readNetFromDarknet('backup/yolov4-tiny-custom-640.cfg', 'backup/yolov4-tiny-custom-640_last.weights')
     net.setPreferableBackend(cv.dnn.DNN_BACKEND_OPENCV)
     model = cv.dnn_DetectionModel(net)
 
-    #frame = cv.imread('test03.jpg')
-    #detect('test03.jpg', frame)
-    
 class Mode:
 
     def __init__(self, path):
@@ -102,23 +100,19 @@ class Mode:
             qr_detector.show('frame',frame)
             if len(ret)>=1:
                 for i in ret:
-                    if i not in c:
+                    if i not in c and len(i)== 44:
                         c.append(i)
+                        print(c)
                     else:
                         pass
-            print(c)
+            
             #print(ret)
             file.close()
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
-
-
-
+c = []
 video = True
-
 input_video = cv2.VideoCapture(0)
-
 new_array= []
-
 Mode.Video(input_video)
     
