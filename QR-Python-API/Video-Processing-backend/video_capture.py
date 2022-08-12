@@ -2,7 +2,6 @@
 
 import json
 from operator import truediv
-import cv2 as cv
 import numpy as np
 import time
 from tempfile import NamedTemporaryFile
@@ -16,9 +15,9 @@ class qr_detector:
     def __init__(self, path) :
         self.path = path 
     def show(self, frame):
-        return cv.imshow(self, frame)
+        return cv2.imshow(self, frame)
     def read(self):
-        return cv.imread(self)
+        return cv2.imread(self)
 
     def decoder(image, dictionary, array):
         
@@ -43,8 +42,6 @@ class qr_detector:
             
 
         return 
-
-        # Show output image
             
     def detect(self, frame):
        
@@ -65,25 +62,24 @@ class qr_detector:
         elapsed_ms = time.time() - start_time
         dictionary = {}
         array = []
-        cv.putText(frame, '%.2f s, Qr found: %d' % (elapsed_ms, len(classes)), (40, 40), cv.FONT_HERSHEY_SIMPLEX, 1, COLOR_RED, 2)
+        cv2.putText(frame, '%.2f s, Qr found: %d' % (elapsed_ms, len(classes)), (40, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, COLOR_RED, 2)
         class_names = open('data/obj.names').read().strip().split('\n')
         for (classid, score, box) in zip(classes, scores, boxes):
             label = "%s : %f" % (class_names[classid], score) 
-            cv.rectangle(frame, box, COLOR_BLUE, 2)
+            cv2.rectangle(frame, box, COLOR_BLUE, 2)
             #cv.putText(frame, label, (box[0], box[1] - 10), cv.FONT_HERSHEY_SIMPLEX, 0.5, COLOR_BLUE, 2)
             x,y,w,h = box
             ROI = frame[y:y+h, x:x+w]
-            print()
             file = NamedTemporaryFile(suffix=".jpg",prefix="./frame_",delete=True)
-            cv.imwrite(file.name, ROI)
+            cv2.imwrite(file.name, ROI)
             qr_detector.decoder(ROI, dictionary, array)
             file.close()
-        #qr_detector.show(self, frame)
+
         return array
 
-    net = cv.dnn.readNetFromDarknet('backup/yolov4-tiny-custom-640.cfg', 'backup/yolov4-tiny-custom-640_last.weights')
-    net.setPreferableBackend(cv.dnn.DNN_BACKEND_OPENCV)
-    model = cv.dnn_DetectionModel(net)
+    net = cv2.dnn.readNetFromDarknet('backup/yolov4-tiny-custom-640.cfg', 'backup/yolov4-tiny-custom-640_last.weights')
+    net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
+    model = cv2.dnn_DetectionModel(net)
 
 class Mode:
 
@@ -103,6 +99,12 @@ class Mode:
                         if i not in c and len(i)== 44:
                             c.append(i)
                             print(c)
+                            json_file = json.dumps(c)
+                            json_last = json.dumps(i)
+                            with open("data.json", "w") as outfile:
+                                outfile.write(json_file)
+                            with open("data_last.json", "w") as outfile2:
+                                outfile2.write(json_last)
                         else:
                             pass
                 
@@ -113,7 +115,6 @@ class Mode:
             except Exception as e:  # Si hay una excepcion, muestra cual es 🤔
                 print(e)
 c = []
-video = True
 input_video = cv2.VideoCapture(0)
 new_array= []
 Mode.Video(input_video)
