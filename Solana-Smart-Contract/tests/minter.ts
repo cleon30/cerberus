@@ -35,7 +35,7 @@ describe("minter", () => {
 			})
 			.rpc();
 	});
-	const mint = Keypair.generate();
+	// const mint = Keypair.generate();
 	it("Is initialized!", async () => {
 		// Add your test here.
 		const [mint,] = await PublicKey.findProgramAddress(

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import json
 app = FastAPI()
-
+# instruction to deploy server --> uvicorn main:app --reload
 @app.get("/data")
 async def room():
     with open('../data.json') as json_file:
