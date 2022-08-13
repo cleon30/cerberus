@@ -1,9 +1,9 @@
 [features]
 seeds = false
 [programs.devnet]
-whitelist = "4C8szhGMKF9GYxRxAtyyXYS9BCX6uqVdsVeECEmV6Lgp"
-counter = "BZnq2ka3aWDe2T9Hi4V5qJYWyTgdKuJjY31RxvHwdAwm"
-minter = "GkgU4ghPP4zkG53Q9zcqD1z8b1otLFhjvBvRQiXyUwFC"
+whitelist = "FFo2xyP5Dd1BT5mFLZKvMoohzx2pdMBg9mgvyFb6WXRV"
+counter = "BBNwkZDfVUgAeTWTUrsxbvcnuRpNz5sGGsbrrnKTSxEC"
+minter = "3hpTR6o1PvFRsu7TByFf9iDUWYss45ATAXbfWxkHGbfm"
 [registry]
 url = "https://anchor.projectserum.com"
 
