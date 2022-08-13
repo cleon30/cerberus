@@ -6,21 +6,30 @@ import { Connection, PublicKey, clusterApiUrl, Keypair } from '@solana/web3.js';
 import { AnchorProvider, Program, Provider, web3, utils } from '@project-serum/anchor';
 import idl2 from './whitelist.json';
 import kp from './keypair.json';
-
-
 import './App.css';
 
+
+async function airdrop(connection, destinationWallet, amount) {
+  const airdropSignature = await connection.requestAirdrop(destinationWallet.publicKey, 
+    amount * anchor.web3.LAMPORTS_PER_SOL);
+  
+  const latestBlockHash = await connection.getLatestBlockhash();
+
+  const tx = await connection.confirmTransaction({
+    blockhash: latestBlockHash.blockhash,
+    lastValidBlockHeight: latestBlockHash.lastValidBlockHeight,
+    signature: airdropSignature
+  });
+}
+
 function App() {
-const [todos, setTodos] = useState([])
+const [data, setData] = useState([])
   
 
   const fetching = async() => {
-
       const response = await fetch("http://127.0.0.1:8000/data");
-      const todos = await response.json()
-      console.log(todos);
-      setTodos(todos)
-    
+      const new_data = await response.json()
+      setData(new_data)
   }
 
 
@@ -34,6 +43,7 @@ const [todos, setTodos] = useState([])
     }, [callback]);
   
     // Set up the interval.
+
     useEffect(() => {
       function tick() {
         savedCallback.current();
@@ -45,16 +55,12 @@ const [todos, setTodos] = useState([])
     }, [delay]);
   }
   function Request() {
-    let [requestCount, setRequestCount] = useState(0);
    
-    // Run every second
     const delay = 1000;
   
     useInterval(() => {
-      // Make the request here
-      
+    
       fetching()
-      console.log(1);
     }, delay);
   
     return <h1>{requestCount}</h1>;
