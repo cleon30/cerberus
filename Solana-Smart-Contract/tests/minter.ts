@@ -24,7 +24,7 @@ const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey(
 const buyer = new PublicKey("4mDqXYgn4y5D4CYnDPCE46xFNmrZwoRz3FtNihexRBFz");
 
 const mint = Keypair.generate();
-it("Is initialized!", async () => {
+it("Is minted!", async () => {
 	
 	// Add your test here.
 	// const [mint, _] = await PublicKey.findProgramAddress(

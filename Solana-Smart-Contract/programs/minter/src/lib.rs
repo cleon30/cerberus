@@ -5,20 +5,11 @@ use {
     mpl_token_metadata::{instruction as token_instruction, ID as TOKEN_METADATA_ID},
 };
 
-declare_id!("6z9fyx9skXZjRK7XfUSCLgtSZYTyz32HKLAYPmANsLM5");
-const CREATE_MINT_SEED: &[u8] = b"createmints";
+declare_id!("HmjebbJ7FpFsjg28kn1jT8LKoA4JXKi597581ct7YeFY");
 
 #[program]
 pub mod minter {
     use super::*;
-    pub fn initialize_storage_account(ctx: Context<InitializeStorageAccount>) -> Result<()> {
-        let storage_account = &mut ctx.accounts.storage_account;
-        let authority = &mut ctx.accounts.payer;
-        storage_account.authority = authority.key();
-        storage_account.bump = *ctx.bumps.get("storage_account").unwrap();
-
-        Ok(())
-    }
 
     pub fn mint(
         ctx: Context<MintNft>,
@@ -256,25 +247,4 @@ pub struct SendNFT<'info> {
     pub associated_token_program: Program<'info, associated_token::AssociatedToken>,
 }
 
-#[derive(Accounts)]
 
-pub struct InitializeStorageAccount<'info> {
-    #[account(init, payer=payer, seeds =[payer.key().as_ref(), CREATE_MINT_SEED], bump, space = 1000)]
-    pub storage_account: Account<'info, MintedAccountStore>,
-    #[account(mut)]
-    pub payer: Signer<'info>,
-    system_program: Program<'info, System>,
-}
-
-#[account]
-pub struct MintAccountAddress {
-    pub authority: Pubkey,
-    pub mint: Pubkey,
-}
-
-#[account]
-pub struct MintedAccountStore {
-    pub authority: Pubkey,
-    bump: u8,
-    pub mints: u64,
-}
