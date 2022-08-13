@@ -7,6 +7,8 @@ import { AnchorProvider, Program, Provider, web3, utils } from '@project-serum/a
 import idl2 from './whitelist.json';
 import kp from './keypair.json';
 import './App.css';
+import { Counter } from "./types/counter";
+import { Whitelist } from "./types/whitelist";
 
 
 async function airdrop(connection, destinationWallet, amount) {
@@ -23,7 +25,12 @@ async function airdrop(connection, destinationWallet, amount) {
 }
 
 function App() {
-const [data, setData] = useState([])
+  const [data, setData] = useState([]);
+  const provider = anchor.AnchorProvider.env();
+  anchor.setProvider(provider);
+  const LAMPORTS_PER_SOL = 1000000000;
+  // const CounterProgram = anchor.workspace.Counter as Program<Counter>;
+  // const WhitelistProgram = anchor.workspace.Whitelist as Program<Whitelist>;
   
 
   const fetching = async() => {
@@ -63,7 +70,7 @@ const [data, setData] = useState([])
       fetching()
     }, delay);
   
-    return <h1>{requestCount}</h1>;
+    return <h1>{data}</h1>;
   }
 
   return (
