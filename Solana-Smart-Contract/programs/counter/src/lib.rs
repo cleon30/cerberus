@@ -5,7 +5,7 @@ use whitelist::cpi::accounts::{
 use crate::whitelist::Wallet;
 use whitelist::program::Whitelist;
 use whitelist::{self};
-declare_id!("BBNwkZDfVUgAeTWTUrsxbvcnuRpNz5sGGsbrrnKTSxEC");
+declare_id!("DXsTMq7Pe4Kug5nUPHYxAUTmysk2XEc5vkB2RSKSabm");
 
 const DISCRIMINATOR_LENGTH: usize = 8;
 const PUBKEY_LENGTH: usize = 32;

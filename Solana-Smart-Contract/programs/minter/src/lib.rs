@@ -5,7 +5,7 @@ use {
     mpl_token_metadata::{instruction as token_instruction, ID as TOKEN_METADATA_ID},
 };
 
-declare_id!("3hpTR6o1PvFRsu7TByFf9iDUWYss45ATAXbfWxkHGbfm");
+declare_id!("6z9fyx9skXZjRK7XfUSCLgtSZYTyz32HKLAYPmANsLM5");
 const CREATE_MINT_SEED: &[u8] = b"createmints";
 
 #[program]
@@ -25,16 +25,14 @@ pub mod minter {
         metadata_title: String,
         metadata_symbol: String,
         metadata_uri: String,
-        creator_key: Pubkey,
+        
     ) -> Result<()> {
-        let store_account = &mut ctx.accounts.storage_account;
-        let collection = mpl_token_metadata::state::Collection {
-            verified: false,
-            key: creator_key,
-        };
+        
+        
         // let to_be_sent = &mut ctx.accounts.to_be_sent_account;
 
-    
+        msg!("Creating mint account...");
+        msg!("Mint: {}", &ctx.accounts.mint.key());
         system_program::create_account(
             CpiContext::new(
                 ctx.accounts.token_program.to_account_info(),
@@ -47,19 +45,9 @@ pub mod minter {
             82,
             &ctx.accounts.token_program.key(),
         )?;
-        let creators = vec![
-            // mpl_token_metadata::state::Creator {
-            //     address: creator_key,
-            //     verified: false,
-            //     share: 100,
-            // },
-            mpl_token_metadata::state::Creator {
-                address: ctx.accounts.mint_authority.key(),
-                verified: false,
-                share: 100,
-            },
-        ];
-
+        
+        msg!("Initializing mint account...");
+        msg!("Mint: {}", &ctx.accounts.mint.key());
         token::initialize_mint(
             CpiContext::new(
                 ctx.accounts.token_program.to_account_info(),
@@ -73,7 +61,8 @@ pub mod minter {
             Some(&ctx.accounts.mint_authority.key()),
         )?;
 
-    
+        msg!("Creating token account...");
+        msg!("Token Address: {}", &ctx.accounts.token_account.key());
         associated_token::create(CpiContext::new(
             ctx.accounts.associated_token_program.to_account_info(),
             associated_token::Create {
@@ -87,12 +76,14 @@ pub mod minter {
             },
         ))?;
 
-        store_account.authority = ctx.accounts.mint_authority.key();
-        store_account.mints += 1;
+        // store_account.authority = ctx.accounts.mint_authority.key();
+        // store_account.mints += 1;
         // to_be_sent.authority = to_be_sent_account;
         // to_be_sent.mint = ctx.accounts.token_account.key();
 
-       
+        msg!("Minting token to token account...");
+        msg!("Mint: {}", &ctx.accounts.mint.to_account_info().key());
+        msg!("Token Address: {}", &ctx.accounts.token_account.key());
         token::mint_to(
             CpiContext::new(
                 ctx.accounts.token_program.to_account_info(),
@@ -105,7 +96,11 @@ pub mod minter {
             1,
         )?;
 
-   
+        msg!("Creating metadata account...");
+        msg!(
+            "Metadata account address: {}",
+            &ctx.accounts.metadata.to_account_info().key()
+        );
         invoke(
             &token_instruction::create_metadata_accounts_v2(
                 TOKEN_METADATA_ID,
@@ -117,11 +112,11 @@ pub mod minter {
                 metadata_title,
                 metadata_symbol,
                 metadata_uri,
-                Some(creators),
+                None,
                 1,
                 true,
                 false,
-                Some(collection),
+                None,
                 None,
             ),
             &[
@@ -133,7 +128,11 @@ pub mod minter {
             ],
         )?;
 
-      
+        msg!("Creating master edition metadata account...");
+        msg!(
+            "Master edition metadata account address: {}",
+            &ctx.accounts.master_edition.to_account_info().key()
+        );
         invoke(
             &token_instruction::create_master_edition_v3(
                 TOKEN_METADATA_ID,
@@ -155,12 +154,16 @@ pub mod minter {
             ],
         )?;
 
-    
+        msg!("Token mint process completed successfully.");
 
         Ok(())
     }
     pub fn send(ctx: Context<SendNFT>) -> Result<()> {
-      
+        msg!("Creating buyer token account...");
+        msg!(
+            "Buyer Token Address: {}",
+            &ctx.accounts.buyer_token_account.key()
+        );
         associated_token::create(CpiContext::new(
             ctx.accounts.associated_token_program.to_account_info(),
             associated_token::Create {
@@ -174,8 +177,15 @@ pub mod minter {
             },
         ))?;
 
-     
-      
+        msg!("Transferring NFT...");
+        msg!(
+            "Owner Token Address: {}",
+            &ctx.accounts.owner_token_account.key()
+        );
+        msg!(
+            "Buyer Token Address: {}",
+            &ctx.accounts.buyer_token_account.key()
+        );
         token::transfer(
             CpiContext::new(
                 ctx.accounts.token_program.to_account_info(),
@@ -187,7 +197,9 @@ pub mod minter {
             ),
             1,
         )?;
-      
+        msg!("NFT transferred successfully.");
+
+        msg!("Sale completed successfully!");
 
         Ok(())
     }
@@ -196,8 +208,7 @@ pub mod minter {
 #[derive(Accounts)]
 // #[instruction(to_be_sent:Pubkey)]
 pub struct MintNft<'info> {
-    #[account(mut, seeds = [mint_authority.key().as_ref(), CREATE_MINT_SEED], bump = storage_account.bump)]
-    pub storage_account: Account<'info, MintedAccountStore>,
+   
     /// CHECK: We're about to create this with Metaplex
     // #[account(init, seeds=[mint_authority.key().as_ref(),TO_BE_SENT_SEED , to_be_sent.key().as_ref()], payer=mint_authority, bump, space = 1000)]
     // pub to_be_sent_account: Account<'info, MintAccountAddress>,
@@ -248,7 +259,7 @@ pub struct SendNFT<'info> {
 #[derive(Accounts)]
 
 pub struct InitializeStorageAccount<'info> {
-    #[account(init, payer=payer, seeds =[payer.key().as_ref(), CREATE_MINT_SEED], bump, space = 1500)]
+    #[account(init, payer=payer, seeds =[payer.key().as_ref(), CREATE_MINT_SEED], bump, space = 1000)]
     pub storage_account: Account<'info, MintedAccountStore>,
     #[account(mut)]
     pub payer: Signer<'info>,

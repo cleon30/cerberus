@@ -21,7 +21,7 @@ let counterBump: number;
 let initialized = false;
 
 const init = async() =>{
-  
+
     await airdrop(provider.connection, authority,2);
 
     [counterPDA, counterBump]= await anchor.web3.PublicKey.findProgramAddress(
@@ -81,6 +81,7 @@ const script_function = async() =>{
           })
           .signers([authority])
           .rpc();
+    
 
 }
 

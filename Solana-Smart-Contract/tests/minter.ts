@@ -3,8 +3,6 @@ import { Program } from "@project-serum/anchor";
 import { Minter } from "../target/types/minter";
 import { Keypair, PublicKey } from "@solana/web3.js";
 
-
-describe("minter", () => {
 	// Configure the client to use the local cluster.
 
 	
@@ -23,22 +21,8 @@ const testNftUri =
 const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey(
 	"metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s",
 );
-const buyer = new PublicKey("9M19njTrbdaoL1BnLNi87M9CChdNiShFeYUTV9VkAnyp");
-// it("Creates the Storage Account", async () => {
-// 	const [pda, _] = await PublicKey.findProgramAddress(
-// 		[
-// 			wallet.publicKey.toBuffer(),
-// 			Buffer.from(anchor.utils.bytes.utf8.encode(CREATE_MINT_SEED)),
-// 		],
-// 		program.programId,
-// 	);
-// 	const txn = await program.methods
-// 		.initializeStorageAccount()
-// 		.accounts({
-// 			storageAccount: pda,
-// 		})
-// 		.rpc();
-// });
+const buyer = new PublicKey("4mDqXYgn4y5D4CYnDPCE46xFNmrZwoRz3FtNihexRBFz");
+
 const mint = Keypair.generate();
 it("Is initialized!", async () => {
 	
@@ -50,15 +34,6 @@ it("Is initialized!", async () => {
 	// 	],
 	// 	program.programId,
 	// );
-
-	const [pda, _] = await PublicKey.findProgramAddress(
-		[
-			wallet.publicKey.toBuffer(),
-			Buffer.from(anchor.utils.bytes.utf8.encode(CREATE_MINT_SEED)),
-		],
-		program.programId,
-	);
-
 	// const mint = Keypair.generate();
 	// console.log(mint.secretKey);
 	const tokenAddress = await anchor.utils.token.associatedAddress({
@@ -92,9 +67,8 @@ it("Is initialized!", async () => {
 	try{
 		
 		await program.methods
-			.mint(testNftTitle, testNftSymbol, testNftUri, wallet.publicKey)
+			.mint(testNftTitle, testNftSymbol, testNftUri)
 			.accounts({
-				storageAccount: pda,
 				masterEdition: masterEditionAddress,
 				metadata: metadataAddress,
 				mint: mint.publicKey,
@@ -111,6 +85,7 @@ it("Is initialized!", async () => {
 	
 
 });
+
 
 it("Transfers NFTs", async () => {
 	const ownerTokenAddress = await anchor.utils.token.associatedAddress({
@@ -137,5 +112,4 @@ it("Transfers NFTs", async () => {
 			buyerAuthority: buyer,
 		})
 		.rpc();
-});
 });
