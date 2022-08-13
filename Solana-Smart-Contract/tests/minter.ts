@@ -7,13 +7,14 @@ import { Keypair, PublicKey } from "@solana/web3.js";
 
 	
 // Configure the client to use the local cluster.
+
+const process =  async () => {
 anchor.setProvider(anchor.AnchorProvider.env());
 
 const program = anchor.workspace.Minter as Program<Minter>;
 
 const provider = anchor.AnchorProvider.env();
 const wallet = provider.wallet;
-const CREATE_MINT_SEED = "createmints";
 const testNftTitle = "Beta";
 const testNftSymbol = "BETA";
 const testNftUri =
@@ -24,18 +25,9 @@ const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey(
 const buyer = new PublicKey("4mDqXYgn4y5D4CYnDPCE46xFNmrZwoRz3FtNihexRBFz");
 
 const mint = Keypair.generate();
-it("Is minted!", async () => {
+	try{
 	
-	// Add your test here.
-	// const [mint, _] = await PublicKey.findProgramAddress(
-	// 	[
-	// 		wallet.publicKey.toBuffer(),
-	// 		Buffer.from(anchor.utils.bytes.utf8.encode(CREATE_MINT_SEED)),
-	// 	],
-	// 	program.programId,
-	// );
-	// const mint = Keypair.generate();
-	// console.log(mint.secretKey);
+	
 	const tokenAddress = await anchor.utils.token.associatedAddress({
 		mint: mint.publicKey,
 		owner: wallet.publicKey,
@@ -63,6 +55,7 @@ it("Is minted!", async () => {
 			TOKEN_METADATA_PROGRAM_ID,
 		)
 	)[0];
+
 	console.log("Master edition metadata initialized");
 	try{
 		
@@ -78,16 +71,17 @@ it("Is minted!", async () => {
 			})
 			.signers([mint])
 			.rpc();
+		console.log("good");
 		}catch(e){
-			console.log(e);
+			await new Promise(f => setTimeout(f, 300))
 
 		};
 	
 
-});
 
 
-it("Transfers NFTs", async () => {
+
+
 	const ownerTokenAddress = await anchor.utils.token.associatedAddress({
 		mint: mint.publicKey,
 		owner: wallet.publicKey,
@@ -112,4 +106,10 @@ it("Transfers NFTs", async () => {
 			buyerAuthority: buyer,
 		})
 		.rpc();
-});
+
+}catch(e){
+	await new Promise(f => setTimeout(f, 300))
+	process();
+}
+}
+process();
