@@ -1,11 +1,10 @@
 import * as anchor from "@project-serum/anchor";
-import { AnchorError, Program } from "@project-serum/anchor";
-import { assert, expect } from "chai";
+import {Program } from "@project-serum/anchor";
+
 import { Counter } from "../target/types/counter";
 import { Whitelist } from "../target/types/whitelist";
 import { Minter } from "../target/types/minter";
-import chai from "chai";
-import { waitForDebugger } from "inspector";
+
 import { Keypair, PublicKey } from "@solana/web3.js";
 import kp from '../keypair.json';
 import kp2 from '../keypair_whitelist.json';
@@ -185,7 +184,7 @@ const interval = setInterval(() => {
     
 }, 1000);
 const mint_iteration = async () => {
-  
+
 }
 
 const mint_process =  async (title, symbol, json_url, address_recipient) => {
