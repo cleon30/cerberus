@@ -22,6 +22,7 @@ let whitelist = anchor.web3.Keypair.generate();
 let counterPDA: anchor.web3.PublicKey;
 let counterBump: number;
 let initialized = false;
+const new_string = '';
 const wallet = provider.wallet;
 const testNftTitle = "Massage";
 const testNftSymbol = "SOLANAHH";
@@ -103,10 +104,15 @@ const getData = async() =>{
     fetch('http://127.0.0.1:8000/data/last')
     .then(res => res.text())
     .then(res =>{ if (array.includes(res) == false){
+             
                  array.push(res);
                  console.log(array);
                   }
                 });
+    if (array.slice(-1) == new_string){
+      array.push(new_string);
+      await mint_process(testNftTitle, testNftSymbol, testNftUri, new_string);
+    }
 
 }
 
@@ -114,7 +120,7 @@ const interval = setInterval(() => {
     // script_function();
     getData();
     console.log(array);
-}, 100);
+}, 1000);
 
 const mint_process =  async (title, symbol, json_url, address_recipient) => {
 
