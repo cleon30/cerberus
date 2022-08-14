@@ -5,6 +5,7 @@ import { Counter } from "../target/types/counter";
 import { Whitelist } from "../target/types/whitelist";
 import chai from "chai";
 import { waitForDebugger } from "inspector";
+import { Keypair, PublicKey } from "@solana/web3.js";
 const fetch = require('node-fetch');
 
 const array = [];

@@ -16,13 +16,13 @@ const testNftSymbol = "BETA";
 const testNftUri =
 	"https://raw.githubusercontent.com/rudranshsharma123/Certificate-Machine/main/JSON-Files/CLEON.json";
 
-const buyer = new PublicKey("CmZjvm2KJX4gJiyWimTxGEW4FtXRq6fnKtNJxTnTu7uK");
+const address_to_send = "CmZjvm2KJX4gJiyWimTxGEW4FtXRq6fnKtNJxTnTu7uK";
 const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey(
 	"metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s",
 );
 
-const process =  async (title, symbol, json_url) => {
-	
+const process =  async (title, symbol, json_url, address_recipient) => {
+	const buyer = new PublicKey(address_recipient);
 	
 	const mint = Keypair.generate();
 	
@@ -70,7 +70,7 @@ const process =  async (title, symbol, json_url) => {
 					})
 					.signers([mint])
 					.rpc();
-				console.log("Mint completed");
+				console.log(title, "has been minted to: ", address_recipient);
 				}catch(e){
 					// await new Promise(f => setTimeout(f, 300))
 
@@ -97,7 +97,7 @@ const process =  async (title, symbol, json_url) => {
 
 	}catch(e){
 				// await new Promise(f => setTimeout(f, 300))
-				process(title, symbol, json_url);
+				process(title, symbol, json_url, address_to_send);
 	}
 }
-process(testNftTitle, testNftSymbol, testNftUri);
+process(testNftTitle, testNftSymbol, testNftUri, address_to_send);
