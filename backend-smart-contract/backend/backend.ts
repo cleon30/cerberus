@@ -7,6 +7,7 @@ import { Minter } from "../target/types/minter";
 import chai from "chai";
 import { waitForDebugger } from "inspector";
 import { Keypair, PublicKey } from "@solana/web3.js";
+// import kp from '../keypair.json';
 const fetch = require('node-fetch');
 
 const array = [];
