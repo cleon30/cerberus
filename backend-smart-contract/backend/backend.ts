@@ -8,10 +8,10 @@ import chai from "chai";
 import { waitForDebugger } from "inspector";
 import { Keypair, PublicKey } from "@solana/web3.js";
 import kp from '../keypair.json';
+console.clear();
+
 const fetch = require('node-fetch');
-
 const array = [];
-
 const provider = anchor.AnchorProvider.env();
 anchor.setProvider(provider);
 
@@ -127,8 +127,6 @@ const interval = setInterval(() => {
       console.log(array);
     }
   
-
-
     getData();
     
 }, 1000);
