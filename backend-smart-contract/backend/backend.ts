@@ -25,7 +25,7 @@ let counterBump: number;
 var initialized_counter= false;
 var initialized_pointing= false;
 var called_initialized = false;
-const new_string = '';
+var new_string:string;
 const wallet = provider.wallet;
 const testNftTitle = "Massage";
 const testNftSymbol = "SOLANAHH";
@@ -44,6 +44,7 @@ const authority = anchor.web3.Keypair.fromSecretKey(secret)
   
 // }
 const init = async() =>{
+
     console.log("Initializing!")
     await airdrop(provider.connection, authority,1);
     await new Promise(f => setTimeout(f,1000));
@@ -68,8 +69,8 @@ const init = async() =>{
           .rpc();
           initialized_counter=true;
         
-  }catch(e){
-    console.log(e)
+  }catch(_){
+    console.log("Counter has already been created");
     initialized_counter = true;
   }
   try{
@@ -87,8 +88,8 @@ const init = async() =>{
     .rpc();
  
     initialized_pointing=true;
-  }catch(e){
-    console.log(e);
+  }catch(_){
+    console.log("Counter has already been pointed");
     initialized_pointing = true;
   }
     let counter = await CounterProgram.account.counter.fetch(counterPDA);
@@ -124,18 +125,13 @@ const script_function = async() =>{
     
 
 }
-const inita = async() =>{
-  console.log("inita");
-}
+
 
 const getData = async() =>{
     fetch('http://127.0.0.1:8000/data/last')
     .then(res => res.text())
-    .then(res =>{ if (array.includes(res) == false){
-             
-                 array.push(res);
-                //  inita();
-                
+    .then(res =>{ if ((array.includes(res) == false) && res.length==46){
+                 new_string = res; 
                   }
                 });
     // console.log(initialized_counter, initialized_pointing);
@@ -150,6 +146,13 @@ const interval = setInterval(() => {
         init();
         called_initialized = true;
     }
+    if (array.includes(new_string)== false && new_string != undefined){
+      array.push(new_string);
+      console.log(new_string);
+      console.log(array);
+    }
+  
+
 
     getData();
     
@@ -188,7 +191,6 @@ const mint_process =  async (title, symbol, json_url, address_recipient) => {
 					TOKEN_METADATA_PROGRAM_ID,
 				)
 			)[0];
-      console.log("hello");
 			try{
 				
 				await MinterProgram.methods
