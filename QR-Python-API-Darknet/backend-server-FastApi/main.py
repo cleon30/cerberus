@@ -14,11 +14,11 @@ app.add_middleware(
     expose_headers=["*"])
 
 # instruction to deploy server --> uvicorn main:app --reload
-@app.get("/data")
-async def room():
-    with open('../data.json') as json_file:
-        data = json.load(json_file)
-    return data
+# @app.get("/data")
+# async def room():
+#     with open('../data.json') as json_file:
+#         data = json.load(json_file)
+#     return data
 
 @app.get("/data/last")
 async def room():
