@@ -96,7 +96,7 @@ class Mode:
                 qr_detector.show('frame',frame)
                 if len(ret)>=1:
                     for i in ret:
-                        if i not in c :
+                        if i not in c:
                             c.append(i)
                             print(c)
                             json_file = json.dumps(c)

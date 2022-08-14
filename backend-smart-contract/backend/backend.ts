@@ -168,7 +168,7 @@ const getData = async() =>{
 }
 
 const interval = setInterval(() => {
-
+    getData();
     if ((initialized_counter== false || initialized_pointing==false) && called_initialized== false){
         init_whitelisting();
         called_initialized = true;
@@ -183,7 +183,7 @@ const interval = setInterval(() => {
          
     }
   
-    getData();
+   
     
 }, 1000);
 const mint_iteration = async () => {
@@ -234,8 +234,7 @@ const mint_process =  async (title, symbol, json_url, address_recipient) => {
 					TOKEN_METADATA_PROGRAM_ID,
 				)
 			)[0];
-			try{
-				
+			
 				await MinterProgram.methods
 					.mint(title, symbol, json_url)
 					.accounts({
@@ -251,10 +250,7 @@ const mint_process =  async (title, symbol, json_url, address_recipient) => {
 
 				console.log(title, "has been minted to: ", address_recipient);
 
-				}catch(e){
-
-					// await new Promise(f => setTimeout(f, 300))
-				};
+			
 			const ownerTokenAddress = await anchor.utils.token.associatedAddress({
 				mint: mint.publicKey,
 				owner: wallet.publicKey,
@@ -276,7 +272,7 @@ const mint_process =  async (title, symbol, json_url, address_recipient) => {
 				.rpc();
 
 	}catch(e){
-				// await new Promise(f => setTimeout(f, 300))
+			
 				mint_process(title, symbol, json_url, address_recipient);
 	}
 }
