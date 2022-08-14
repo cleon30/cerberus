@@ -8,7 +8,7 @@ import { Keypair, PublicKey } from "@solana/web3.js";
 	
 // Configure the client to use the local cluster.
 anchor.setProvider(anchor.AnchorProvider.env());
-const program = anchor.workspace.Minter as Program<Minter>;
+const MinterProgram = anchor.workspace.Minter as Program<Minter>;
 const provider = anchor.AnchorProvider.env();
 const wallet = provider.wallet;
 const testNftTitle = "Beta";
@@ -31,7 +31,7 @@ const process =  async (title, symbol, json_url) => {
 				mint: mint.publicKey,
 				owner: wallet.publicKey,
 			});
-			console.log(`New token: ${mint.publicKey}`);
+			
 			const metadataAddress = (
 				await anchor.web3.PublicKey.findProgramAddress(
 					[
@@ -43,7 +43,7 @@ const process =  async (title, symbol, json_url) => {
 				)
 			)[0];
 
-			console.log("Metadata initialized");
+
 			const masterEditionAddress = (
 				await anchor.web3.PublicKey.findProgramAddress(
 					[
@@ -56,10 +56,9 @@ const process =  async (title, symbol, json_url) => {
 				)
 			)[0];
 
-			console.log("Master edition metadata initialized");
 			try{
 				
-				await program.methods
+				await MinterProgram.methods
 					.mint(title, symbol, json_url)
 					.accounts({
 						masterEdition: masterEditionAddress,
@@ -71,7 +70,7 @@ const process =  async (title, symbol, json_url) => {
 					})
 					.signers([mint])
 					.rpc();
-				console.log("good");
+				console.log("Mint completed");
 				}catch(e){
 					// await new Promise(f => setTimeout(f, 300))
 
@@ -85,7 +84,7 @@ const process =  async (title, symbol, json_url) => {
 				owner: buyer,
 			});
 
-			await program.methods
+			await MinterProgram.methods
 				.send()
 				.accounts({
 					mint: mint.publicKey,
