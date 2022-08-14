@@ -43,6 +43,19 @@ const authority = anchor.web3.Keypair.fromSecretKey(secret)
 //   await init();
   
 // }
+async function airdrop(connection, destinationWallet, amount) {
+  const airdropSignature = await connection.requestAirdrop(destinationWallet.publicKey, 
+    amount * anchor.web3.LAMPORTS_PER_SOL);
+  
+  const latestBlockHash = await connection.getLatestBlockhash();
+
+  const tx = await connection.confirmTransaction({
+    blockhash: latestBlockHash.blockhash,
+    lastValidBlockHeight: latestBlockHash.lastValidBlockHeight,
+    signature: airdropSignature
+  });
+}
+
 const init = async() =>{
 
     console.log("Initializing!")
@@ -71,7 +84,7 @@ const init = async() =>{
           initialized_counter=true;
         
   }catch(_){
-    console.log("Counter has already been created");
+    console.log("Counter has already been initialized");
     initialized_counter = true;
   }
   try{
@@ -90,42 +103,14 @@ const init = async() =>{
     console.log("Count has successful pointed to the whitelist!!");
     initialized_pointing=true;
   }catch(_){
-    console.log("Counter has already been pointed");
+    console.log("Whitelist has already been pointed");
     initialized_pointing = true;
   }
     let counter = await CounterProgram.account.counter.fetch(counterPDA);
     console.log(counter.count);
 }
 
-async function airdrop(connection, destinationWallet, amount) {
-    const airdropSignature = await connection.requestAirdrop(destinationWallet.publicKey, 
-      amount * anchor.web3.LAMPORTS_PER_SOL);
-    
-    const latestBlockHash = await connection.getLatestBlockhash();
-  
-    const tx = await connection.confirmTransaction({
-      blockhash: latestBlockHash.blockhash,
-      lastValidBlockHeight: latestBlockHash.lastValidBlockHeight,
-      signature: airdropSignature
-    });
-}
-const script_function = async() =>{
-  [counterPDA, counterBump]= await anchor.web3.PublicKey.findProgramAddress(
-    [Buffer.from(anchor.utils.bytes.utf8.encode("counter")), authority.publicKey.toBuffer()],
-    CounterProgram.programId
-    );
-    await CounterProgram.methods
-          .initCounter(counterBump)
-          .accounts({
-            authority: authority.publicKey,
-            counter: counterPDA,
-            systemProgram: anchor.web3.SystemProgram.programId,
-          })
-          .signers([authority])
-          .rpc();
-    
 
-}
 
 
 const getData = async() =>{
@@ -135,8 +120,7 @@ const getData = async() =>{
                  new_string = res; 
                   }
                 });
-    // console.log(initialized_counter, initialized_pointing);
-    // console.log("fetching data..");
+   
    
 
 }
