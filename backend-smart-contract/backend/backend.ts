@@ -59,12 +59,14 @@ async function airdrop(connection, destinationWallet, amount) {
 
 const init_whitelisting = async() =>{
 
-    console.log("Initializing the whitelist 📩📍!")
-    console.log("....")
+    console.log("Initializing the whitelist 📩📍!");
+    console.log("....");
 
     await airdrop(provider.connection, authority,1);
-    console.log("Airdrop to whitelist authority completed\n")
-    console.log("...........................................")
+
+    console.log("Airdrop to whitelist authority completed\n");
+    console.log("...........................................");
+
     await new Promise(f => setTimeout(f,1000));
 
     [counterPDA, counterBump]= await anchor.web3.PublicKey.findProgramAddress(
@@ -87,15 +89,15 @@ const init_whitelisting = async() =>{
           })
           .signers([authority])
           .rpc();
-          console.log("\x1b[32m","New counter created!");
+          console.log("\x1b[32m", "New counter created!");
           initialized_counter=true;
         
   }catch(_){
-    console.log("\x1b[31m","✘ Counter has already been initialized");
+    console.log("\x1b[31m", "✘ Counter has already been initialized");
     initialized_counter = true;
   }
   try{
-    console.log("\x1b[0m","Pointing the counter to whitelist....");
+    console.log("\x1b[0m", "Pointing the counter to whitelist....");
     console.log(".....");
     await CounterProgram.methods
     .pointToWhitelist()
@@ -108,19 +110,23 @@ const init_whitelisting = async() =>{
     })
     .signers([authority, whitelist])
     .rpc();
-    console.log("\x1b[32m","Count has successful pointed to the whitelist!!");
+    console.log("\x1b[32m", "Count has successful pointed to the whitelist!!");
    
     initialized_pointing=true;
   }catch(_){
-    console.log("\x1b[31m","✘ Whitelist has already been pointed");
+    console.log("\x1b[31m", "✘ Whitelist has already been pointed");
     initialized_pointing = true;
   }
   let counter = await CounterProgram.account.counter.fetch(counterPDA);
-  console.log("\x1b[0m","The default count for this whitelist is:", counter.count.toNumber());
+  console.log("\x1b[0m", "The default count for this whitelist is:", counter.count.toNumber());
 }
 const add_to_whitelist = async(new_account) =>{
  
   try{
+
+    console.log("\n----------------");
+    console.log("Address Received, starting the process..!!\n");
+
     const account_new = new PublicKey(new_account);
 
     let [PDA, _] = await anchor.web3.PublicKey.findProgramAddress(
@@ -129,6 +135,7 @@ const add_to_whitelist = async(new_account) =>{
     )
 
     try{
+      
       
         await CounterProgram.methods
         .addOrRemove(account_new, false)
@@ -145,8 +152,8 @@ const add_to_whitelist = async(new_account) =>{
 
       
       let counter = await CounterProgram.account.counter.fetch(counterPDA);
-      console.log("Adding", account_new.toString(), "to the whitelist");
-      console.log("Number of people in the whitelist:", counter.count.toNumber(),"\n");
+      console.log("The address", "\x1b[32m", account_new.toString(),"\x1b[0m", "has been added to the whitelist!");
+      console.log("Number of people in the whitelist:", counter.count.toNumber());
       mint_iteration();
 
   }catch(e){
@@ -193,7 +200,7 @@ const interval = setInterval(() => {
     
 }, 1000);
 const mint_iteration = async () => {
-
+  console.log("\x1b[32m","Minting Process has begun!!","\x1b[0m");
   let position = 0;
 
   for (var i = 0; i < testNftTitle.length; i++) {
@@ -254,7 +261,7 @@ const mint_process =  async (title, symbol, json_url, address_recipient) => {
 					.signers([mint])
 					.rpc();
 
-				console.log(title, "has been minted to: ", address_recipient);
+				console.log(title,"has been minted to:","\x1b[32m",address_recipient,"\x1b[0m");
 
 			
 			const ownerTokenAddress = await anchor.utils.token.associatedAddress({
