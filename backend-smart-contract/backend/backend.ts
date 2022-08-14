@@ -18,7 +18,7 @@ anchor.setProvider(provider);
 const CounterProgram = anchor.workspace.Counter as Program<Counter>;
 const WhitelistProgram = anchor.workspace.Whitelist as Program<Whitelist>;
 const MinterProgram = anchor.workspace.Minter as Program<Minter>;
-let authority = anchor.web3.Keypair.generate();
+// let authority = anchor.web3.Keypair.generate();
 let whitelist = anchor.web3.Keypair.generate();
 let counterPDA: anchor.web3.PublicKey;
 let counterBump: number;
@@ -34,10 +34,13 @@ const testNftUri =
 const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey(
 	"metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s",
 );
+const arr = Object.values(kp._keypair.secretKey);
+const secret = new Uint8Array(arr);
+const authority = anchor.web3.Keypair.fromSecretKey(secret)
 
 const init = async() =>{
 
-    await airdrop(provider.connection, authority,2);
+    // await airdrop(provider.connection, authority,2);
 
     [counterPDA, counterBump]= await anchor.web3.PublicKey.findProgramAddress(
       [
