@@ -139,6 +139,7 @@ const add_to_whitelist = async(new_account) =>{
       let counter = await CounterProgram.account.counter.fetch(counterPDA);
       console.log("Adding", account_new.toString(), "to the whitelist");
       console.log(counter.count.toNumber());
+
   }catch(e){
       
       let counter = await CounterProgram.account.counter.fetch(counterPDA);
@@ -174,6 +175,7 @@ const interval = setInterval(() => {
         && new_string != undefined){
 
           add_to_whitelist(new_string);
+
           console.log(new_string);
           array.push(new_string);
          
@@ -182,6 +184,9 @@ const interval = setInterval(() => {
     getData();
     
 }, 1000);
+const mint_iteration = async () => {
+  
+}
 
 const mint_process =  async (title, symbol, json_url, address_recipient) => {
 
