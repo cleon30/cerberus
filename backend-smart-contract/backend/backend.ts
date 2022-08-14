@@ -19,12 +19,12 @@ const CounterProgram = anchor.workspace.Counter as Program<Counter>;
 const WhitelistProgram = anchor.workspace.Whitelist as Program<Whitelist>;
 const MinterProgram = anchor.workspace.Minter as Program<Minter>;
 let whitelist = anchor.web3.Keypair.generate();
-let counterPDA: anchor.web3.PublicKey;
+var counterPDA: anchor.web3.PublicKey;
 let counterBump: number;
 var initialized_counter= false;
 var initialized_pointing= false;
 var called_initialized = false;
-var new_string:string;
+var new_string = null;
 const wallet = provider.wallet;
 const testNftTitle = "Massage";
 const testNftSymbol = "SOLANAHH";
@@ -50,13 +50,16 @@ async function airdrop(connection, destinationWallet, amount) {
 
 const init_whitelisting = async() =>{
 
-    console.log("Initializing!")
+    console.log("Initializing the whitelist 📩📍!")
+    console.log("....")
+    console.log(".......")
+    console.log(".........")
     await airdrop(provider.connection, authority,1);
     await new Promise(f => setTimeout(f,1000));
 
     [counterPDA, counterBump]= await anchor.web3.PublicKey.findProgramAddress(
       [
-      Buffer.from(anchor.utils.bytes.utf8.encode("counter")),
+      Buffer.from(anchor.utils.bytes.utf8.encode("counter")), 
       authority.publicKey.toBuffer()
       ],
       CounterProgram.programId
@@ -76,7 +79,7 @@ const init_whitelisting = async() =>{
           initialized_counter=true;
         
   }catch(_){
-    console.log("Counter has already been initialized");
+    console.log("✘ Counter has already been initialized");
     initialized_counter = true;
   }
   try{
@@ -95,13 +98,51 @@ const init_whitelisting = async() =>{
     console.log("Count has successful pointed to the whitelist!!");
     initialized_pointing=true;
   }catch(_){
-    console.log("Whitelist has already been pointed");
+    console.log("✘ Whitelist has already been pointed");
     initialized_pointing = true;
   }
     let counter = await CounterProgram.account.counter.fetch(counterPDA);
     console.log(counter.count);
 }
+const add_to_whitelist = async(new_account) =>{
+ 
+  console.log(new_account.replace(/"/g,""));
+//   console.log("CTu7F93hJAEHzFkyuY6aeE8RYNabAsG1ttArtLMyh2ky");
+// console.log(new_account.replace(/"/g,"") == "CTu7F93hJAEHzFkyuY6aeE8RYNabAsG1ttArtLMyh2ky")
 
+  try{
+    const account_new = new PublicKey(new_account.replace(/"/g,""));
+  
+    console.log(account_new);
+    let [PDA, _] = await anchor.web3.PublicKey.findProgramAddress(
+      [whitelist.publicKey.toBuffer(), account_new.toBuffer()],
+      WhitelistProgram.programId
+    )
+    console.log(PDA.toString());
+    console.log("helo3");
+    try{
+        await CounterProgram.methods
+        .addOrRemove(account_new, false)
+        .accounts({
+          authority: authority.publicKey,
+          counter: counterPDA,
+          pdaId: PDA,
+          whitelisting: whitelist.publicKey,
+          updateId: WhitelistProgram.programId,
+          systemProgram: anchor.web3.SystemProgram.programId,
+        })
+        .signers([authority])
+        .rpc();
+
+      console.log("everything good lol");
+      
+  }catch(e){
+      console.log(e);
+    }
+}catch(e){
+  console.log(e);
+}
+}
 
 
 
@@ -121,10 +162,15 @@ const interval = setInterval(() => {
         init_whitelisting();
         called_initialized = true;
     }
-    if (array.includes(new_string)== false && new_string != undefined){
-      array.push(new_string);
-      console.log(new_string);
-      console.log(array);
+  
+    if ((initialized_counter== true && initialized_pointing==true) 
+        && array.includes(new_string)== false 
+        && new_string != undefined){
+
+          add_to_whitelist(new_string);
+          console.log(new_string);
+          array.push(new_string);
+         
     }
   
     getData();
