@@ -160,12 +160,12 @@ const add_to_whitelist = async(new_account) =>{
 const getData = async() =>{
     fetch('http://127.0.0.1:8000/data/last')
     .then(res => res.text())
-    .then(res =>{ if ((array.includes(res) == false) && res.length==46){
+    .then(res =>{ if ((array.includes(res) == false) && res.length>40){
                  new_string = res.replace(/"/g,""); 
                  }
                 }
     );
-    console.log(new_string);
+    // console.log(new_string);
 }
 
 const interval = setInterval(() => {
