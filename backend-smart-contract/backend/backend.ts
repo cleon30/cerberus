@@ -165,7 +165,6 @@ const getData = async() =>{
                  }
                 }
     );
-    // console.log(new_string);
 }
 
 const interval = setInterval(() => {
