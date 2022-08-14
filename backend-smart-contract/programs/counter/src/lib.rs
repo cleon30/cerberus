@@ -5,7 +5,7 @@ use whitelist::cpi::accounts::{
 use crate::whitelist::Wallet;
 use whitelist::program::Whitelist;
 use whitelist::{self};
-declare_id!("7xDHuz7n9Sp6ck9vbrSE1weXYj2rxaREw3RbAAdJ39zK");
+declare_id!("BAkJm4eDSRr6Rn1xeu8kxXnuD46B1iNTz2fPF9NK8sDh");
 
 const DISCRIMINATOR_LENGTH: usize = 8;
 const PUBKEY_LENGTH: usize = 32;
@@ -17,13 +17,15 @@ pub mod counter {
 
     pub fn init_counter(ctx: Context<InitCounter>, bump:u8) -> Result<()> {
 
+        msg!("Initializing counter account...");
         let counter = &mut ctx.accounts.counter;
         counter.authority = ctx.accounts.authority.key();
         counter.count = 0;
         counter.bump = bump;
         counter.program = Pubkey::default();
         counter.initialized = false;
-        
+        msg!("Authority set to ...{}",ctx.accounts.authority.key());
+
         Ok(())
     }
     pub fn point_to_whitelist(ctx: Context<PointWhitelist>) -> Result<()> {
@@ -33,6 +35,7 @@ pub mod counter {
         
         counter.program = ctx.accounts.whitelisting.key();
         counter.initialized = true;
+        msg!("Pointing Counter to a New Whitelist...{}");
         let pointer_ctx = ctx.accounts.whitelist_ctx();
         let _ = whitelist::cpi::new_whitelist(pointer_ctx);
       
@@ -53,12 +56,15 @@ pub mod counter {
         match remove{ 
 
             true => {
+                msg!("Removing process started...");
+                    msg!("Checking that the address actually exist in the whitelist");
                     let check_ctx = ctx.accounts.check_ctx().with_signer(signer);
                     match whitelist::cpi::check_address(check_ctx, wallet.key()){
 
                         Ok(()) =>{
                                     let remove_ctx = ctx.accounts.remove_wallet_ctx().with_signer(signer);
                                     let _ = whitelist::cpi::remove_address(remove_ctx, wallet);
+                                    msg!("-1 to the counter...");
                                     ctx.accounts.counter.count = count.checked_sub(1).unwrap();
                                      Ok(())
                                  }
@@ -68,9 +74,10 @@ pub mod counter {
                     },
 
             false => {
-
+                    msg!("Removing process started...");
                     let add_ctx = ctx.accounts.adding_new_wallet_ctx().with_signer(signer);
                     let _ = whitelist::cpi::add_address(add_ctx, wallet);
+                    msg!("+1 to the counter...");
                     ctx.accounts.counter.count = count.checked_add(1).unwrap();
                     Ok(())
                     } 

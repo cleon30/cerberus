@@ -5,7 +5,7 @@ use {
     mpl_token_metadata::{instruction as token_instruction, ID as TOKEN_METADATA_ID},
 };
 
-declare_id!("HmjebbJ7FpFsjg28kn1jT8LKoA4JXKi597581ct7YeFY");
+declare_id!("FtT5WYN8aHk2g9cZezcsLkAxXhHhkgYfBchrMJynsNo1");
 
 #[program]
 pub mod minter {

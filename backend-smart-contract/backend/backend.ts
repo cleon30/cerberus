@@ -18,7 +18,6 @@ anchor.setProvider(provider);
 const CounterProgram = anchor.workspace.Counter as Program<Counter>;
 const WhitelistProgram = anchor.workspace.Whitelist as Program<Whitelist>;
 const MinterProgram = anchor.workspace.Minter as Program<Minter>;
-// let authority = anchor.web3.Keypair.generate();
 let whitelist = anchor.web3.Keypair.generate();
 let counterPDA: anchor.web3.PublicKey;
 let counterBump: number;
@@ -29,20 +28,13 @@ var new_string:string;
 const wallet = provider.wallet;
 const testNftTitle = "Massage";
 const testNftSymbol = "SOLANAHH";
-const testNftUri =
-	"https://raw.githubusercontent.com/rudranshsharma123/Certificate-Machine/main/JSON-Files/CLEON.json";
-
+const testNftUri = "https://raw.githubusercontent.com/rudranshsharma123/Certificate-Machine/main/JSON-Files/CLEON.json";
 // const address_to_send = "CmZjvm2KJX4gJiyWimTxGEW4FtXRq6fnKtNJxTnTu7uK";
-const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey(
-	"metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s",
-);
+const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s");
 const arr = Object.values(kp._keypair.secretKey);
 const secret = new Uint8Array(arr);
 const authority = anchor.web3.Keypair.fromSecretKey(secret)
-// const all = async()=>{
-//   await init();
-  
-// }
+
 async function airdrop(connection, destinationWallet, amount) {
   const airdropSignature = await connection.requestAirdrop(destinationWallet.publicKey, 
     amount * anchor.web3.LAMPORTS_PER_SOL);
@@ -118,11 +110,9 @@ const getData = async() =>{
     .then(res => res.text())
     .then(res =>{ if ((array.includes(res) == false) && res.length==46){
                  new_string = res; 
-                  }
-                });
-   
-   
-
+                 }
+                }
+    );
 }
 
 const interval = setInterval(() => {

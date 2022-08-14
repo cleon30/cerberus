@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-declare_id!("Dc7ZTiYiq1tuVnkkuuCMSVNgVaWacABFxppKEsqh5DJb");
+declare_id!("EpsbCmDJTV9XHKmeoJb1bQNUtfw6rEKVuGiDXUXJ6YS8");
 
 const DISCRIMINATOR_LENGTH: usize = 8;
 const PUBKEY_LENGTH: usize = 32;
@@ -11,17 +11,29 @@ pub mod whitelist {
     use super::*;
 
     pub fn new_whitelist(ctx: Context<NewWhitelist>) -> Result<()> {
+
         let whitelist = &mut ctx.accounts.whitelist;
         whitelist.authority = ctx.accounts.admin.key();
+        msg!("New Whitelist created!");
+
         Ok(())
     }
-    pub fn add_address(_ctx: Context<AddAddress>, _wallet: Pubkey) -> Result<()> {
+    pub fn add_address(_ctx: Context<AddAddress>, wallet: Pubkey) -> Result<()> {
+
+        msg!("Adding address: {}",wallet);
+
         Ok(())
     }
-    pub fn remove_address(_ctx: Context<RemoveAddress>, _wallet: Pubkey) -> Result<()> {
+    pub fn remove_address(_ctx: Context<RemoveAddress>, wallet: Pubkey) -> Result<()> {
+
+        msg!("Removing address: {}",wallet);
+
         Ok(())
     }
-    pub fn check_address(_ctx: Context<CheckAddress>, _wallet: Pubkey) -> Result<()> {
+    pub fn check_address(_ctx: Context<CheckAddress>, wallet: Pubkey) -> Result<()> {
+
+        msg!("Checking if address: {} is in the whitelist",wallet);
+
         Ok(())
     }
    
