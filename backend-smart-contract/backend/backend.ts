@@ -98,7 +98,9 @@ const script_function = async() =>{
     
 
 }
-
+const inita = async() =>{
+  console.log("inita");
+}
 
 const getData = async() =>{
     fetch('http://127.0.0.1:8000/data/last')
@@ -106,20 +108,22 @@ const getData = async() =>{
     .then(res =>{ if (array.includes(res) == false){
              
                  array.push(res);
-                 console.log(array);
+                //  inita();
+                
                   }
                 });
-    // if (array.slice(-1) == new_string){
-    //   array.push(new_string);
-    //   await mint_process(testNftTitle, testNftSymbol, testNftUri, new_string);
-    // }
+   
 
 }
 
 const interval = setInterval(() => {
     // script_function();
+    if (initialized== false){
+        init();
+        let initialized=true;
+    }
     getData();
-    console.log(array);
+    
 }, 1000);
 
 const mint_process =  async (title, symbol, json_url, address_recipient) => {
