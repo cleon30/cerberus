@@ -22,7 +22,9 @@ const MinterProgram = anchor.workspace.Minter as Program<Minter>;
 let whitelist = anchor.web3.Keypair.generate();
 let counterPDA: anchor.web3.PublicKey;
 let counterBump: number;
-let initialized = false;
+var initialized_counter= false;
+var initialized_pointing= false;
+var called_initialized = false;
 const new_string = '';
 const wallet = provider.wallet;
 const testNftTitle = "Massage";
@@ -37,10 +39,14 @@ const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey(
 const arr = Object.values(kp._keypair.secretKey);
 const secret = new Uint8Array(arr);
 const authority = anchor.web3.Keypair.fromSecretKey(secret)
-
+// const all = async()=>{
+//   await init();
+  
+// }
 const init = async() =>{
-
-    // await airdrop(provider.connection, authority,2);
+    console.log("Initializing!")
+    await airdrop(provider.connection, authority,1);
+    await new Promise(f => setTimeout(f,1000));
 
     [counterPDA, counterBump]= await anchor.web3.PublicKey.findProgramAddress(
       [
@@ -49,7 +55,8 @@ const init = async() =>{
       ],
       CounterProgram.programId
     );
-
+ 
+  try{
     await CounterProgram.methods
           .initCounter(counterBump)
           .accounts({
@@ -59,6 +66,13 @@ const init = async() =>{
           })
           .signers([authority])
           .rpc();
+          initialized_counter=true;
+        
+  }catch(e){
+    console.log(e)
+    initialized_counter = true;
+  }
+  try{
 
     await CounterProgram.methods
     .pointToWhitelist()
@@ -71,6 +85,14 @@ const init = async() =>{
     })
     .signers([authority, whitelist])
     .rpc();
+ 
+    initialized_pointing=true;
+  }catch(e){
+    console.log(e);
+    initialized_pointing = true;
+  }
+    let counter = await CounterProgram.account.counter.fetch(counterPDA);
+    console.log(counter.count);
 }
 
 async function airdrop(connection, destinationWallet, amount) {
@@ -116,16 +138,19 @@ const getData = async() =>{
                 
                   }
                 });
+    // console.log(initialized_counter, initialized_pointing);
+    // console.log("fetching data..");
    
 
 }
 
 const interval = setInterval(() => {
     // script_function();
-    if (initialized== false){
+    if ((initialized_counter== false || initialized_pointing==false) && called_initialized== false){
         init();
-        let initialized=true;
+        called_initialized = true;
     }
+
     getData();
     
 }, 1000);
