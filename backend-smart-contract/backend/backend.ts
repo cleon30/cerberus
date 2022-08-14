@@ -198,7 +198,7 @@ const interval = setInterval(() => {
   
    
     
-}, 1000);
+}, 300);
 const mint_iteration = async () => {
   console.log("\x1b[32m","Minting Process has begun!!","\x1b[0m");
   let position = 0;
