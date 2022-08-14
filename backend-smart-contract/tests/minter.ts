@@ -11,8 +11,8 @@ anchor.setProvider(anchor.AnchorProvider.env());
 const MinterProgram = anchor.workspace.Minter as Program<Minter>;
 const provider = anchor.AnchorProvider.env();
 const wallet = provider.wallet;
-const testNftTitle = "Beta";
-const testNftSymbol = "BETA";
+const testNftTitle = "Massage";
+const testNftSymbol = "SOLANAHH";
 const testNftUri =
 	"https://raw.githubusercontent.com/rudranshsharma123/Certificate-Machine/main/JSON-Files/CLEON.json";
 
@@ -22,8 +22,8 @@ const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey(
 );
 
 const process =  async (title, symbol, json_url, address_recipient) => {
+
 	const buyer = new PublicKey(address_recipient);
-	
 	const mint = Keypair.generate();
 	
 	try{
@@ -42,7 +42,6 @@ const process =  async (title, symbol, json_url, address_recipient) => {
 					TOKEN_METADATA_PROGRAM_ID,
 				)
 			)[0];
-
 
 			const masterEditionAddress = (
 				await anchor.web3.PublicKey.findProgramAddress(
@@ -70,10 +69,12 @@ const process =  async (title, symbol, json_url, address_recipient) => {
 					})
 					.signers([mint])
 					.rpc();
-				console.log(title, "has been minted to: ", address_recipient);
-				}catch(e){
-					// await new Promise(f => setTimeout(f, 300))
 
+				console.log(title, "has been minted to: ", address_recipient);
+
+				}catch(e){
+
+					// await new Promise(f => setTimeout(f, 300))
 				};
 			const ownerTokenAddress = await anchor.utils.token.associatedAddress({
 				mint: mint.publicKey,
