@@ -8,6 +8,7 @@ import chai from "chai";
 import { waitForDebugger } from "inspector";
 import { Keypair, PublicKey } from "@solana/web3.js";
 import kp from '../keypair.json';
+import kp2 from '../keypair_whitelist.json';
 console.clear();
 
 const fetch = require('node-fetch');
@@ -18,7 +19,7 @@ anchor.setProvider(provider);
 const CounterProgram = anchor.workspace.Counter as Program<Counter>;
 const WhitelistProgram = anchor.workspace.Whitelist as Program<Whitelist>;
 const MinterProgram = anchor.workspace.Minter as Program<Minter>;
-let whitelist = anchor.web3.Keypair.generate();
+
 var counterPDA: anchor.web3.PublicKey;
 let counterBump: number;
 var initialized_counter= false;
@@ -33,7 +34,12 @@ const testNftUri = "https://raw.githubusercontent.com/rudranshsharma123/Certific
 const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s");
 const arr = Object.values(kp._keypair.secretKey);
 const secret = new Uint8Array(arr);
-const authority = anchor.web3.Keypair.fromSecretKey(secret)
+const authority = anchor.web3.Keypair.fromSecretKey(secret);
+const arr2 = Object.values(kp2._keypair.secretKey);
+const secret2 = new Uint8Array(arr2);
+const whitelist = anchor.web3.Keypair.fromSecretKey(secret2);
+// const whitelist = anchor.web3.Keypair.generate();
+
 
 async function airdrop(connection, destinationWallet, amount) {
   const airdropSignature = await connection.requestAirdrop(destinationWallet.publicKey, 
@@ -112,15 +118,14 @@ const add_to_whitelist = async(new_account) =>{
 
   try{
     const account_new = new PublicKey(new_account.replace(/"/g,""));
-  
-    console.log(account_new);
+
     let [PDA, _] = await anchor.web3.PublicKey.findProgramAddress(
       [whitelist.publicKey.toBuffer(), account_new.toBuffer()],
       WhitelistProgram.programId
     )
-    console.log(PDA.toString());
-    console.log("helo3");
+
     try{
+      
         await CounterProgram.methods
         .addOrRemove(account_new, false)
         .accounts({
@@ -135,9 +140,13 @@ const add_to_whitelist = async(new_account) =>{
         .rpc();
 
       console.log("everything good lol");
-      
+      let counter = await CounterProgram.account.counter.fetch(counterPDA);
+      console.log(counter.count);
   }catch(e){
-      console.log(e);
+      
+      let counter = await CounterProgram.account.counter.fetch(counterPDA);
+      console.log("Conditions did not meet to add", account_new.toString(), "to the whitelist");
+      console.log("The current whitelist count is:", counter.count.toNumber());
     }
 }catch(e){
   console.log(e);
