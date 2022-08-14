@@ -109,10 +109,10 @@ const getData = async() =>{
                  console.log(array);
                   }
                 });
-    if (array.slice(-1) == new_string){
-      array.push(new_string);
-      await mint_process(testNftTitle, testNftSymbol, testNftUri, new_string);
-    }
+    // if (array.slice(-1) == new_string){
+    //   array.push(new_string);
+    //   await mint_process(testNftTitle, testNftSymbol, testNftUri, new_string);
+    // }
 
 }
 
