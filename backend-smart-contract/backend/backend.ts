@@ -67,6 +67,7 @@ const init = async() =>{
           })
           .signers([authority])
           .rpc();
+          console.log("New counter created!");
           initialized_counter=true;
         
   }catch(_){
@@ -86,7 +87,7 @@ const init = async() =>{
     })
     .signers([authority, whitelist])
     .rpc();
- 
+    console.log("Count has successful pointed to the whitelist!!");
     initialized_pointing=true;
   }catch(_){
     console.log("Counter has already been pointed");
