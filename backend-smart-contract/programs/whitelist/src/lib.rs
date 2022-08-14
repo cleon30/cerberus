@@ -14,25 +14,26 @@ pub mod whitelist {
 
         let whitelist = &mut ctx.accounts.whitelist;
         whitelist.authority = ctx.accounts.admin.key();
+
         msg!("New Whitelist created!");
 
         Ok(())
     }
     pub fn add_address(_ctx: Context<AddAddress>, wallet: Pubkey) -> Result<()> {
 
-        msg!("Adding address: {}",wallet);
+        msg!("Adding address: {}", wallet);
 
         Ok(())
     }
     pub fn remove_address(_ctx: Context<RemoveAddress>, wallet: Pubkey) -> Result<()> {
 
-        msg!("Removing address: {}",wallet);
+        msg!("Removing address: {}", wallet);
 
         Ok(())
     }
     pub fn check_address(_ctx: Context<CheckAddress>, wallet: Pubkey) -> Result<()> {
 
-        msg!("Checking if address: {} is in the whitelist",wallet);
+        msg!("Checking if address: {} is in the whitelist", wallet);
 
         Ok(())
     }

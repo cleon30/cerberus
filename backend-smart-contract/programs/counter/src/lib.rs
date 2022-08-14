@@ -18,12 +18,14 @@ pub mod counter {
     pub fn init_counter(ctx: Context<InitCounter>, bump:u8) -> Result<()> {
 
         msg!("Initializing counter account...");
+        
         let counter = &mut ctx.accounts.counter;
         counter.authority = ctx.accounts.authority.key();
         counter.count = 0;
         counter.bump = bump;
         counter.program = Pubkey::default();
         counter.initialized = false;
+
         msg!("Authority set to ...{}",ctx.accounts.authority.key());
 
         Ok(())
@@ -35,9 +37,11 @@ pub mod counter {
         
         counter.program = ctx.accounts.whitelisting.key();
         counter.initialized = true;
+
         msg!("Pointing Counter to a New Whitelist...{}");
-        let pointer_ctx = ctx.accounts.whitelist_ctx();
-        let _ = whitelist::cpi::new_whitelist(pointer_ctx);
+
+            let pointer_ctx = ctx.accounts.whitelist_ctx();
+            let _ = whitelist::cpi::new_whitelist(pointer_ctx);
       
 
         Ok(())
@@ -48,6 +52,7 @@ pub mod counter {
 
         let counter = &mut ctx.accounts.counter;
         assert!(counter.initialized ==true);
+
         let admin = ctx.accounts.authority.key();
         let count = counter.count;
         let seeds= ["counter".as_bytes().as_ref(), admin.as_ref(), &[counter.bump]];
@@ -56,29 +61,41 @@ pub mod counter {
         match remove{ 
 
             true => {
+
                 msg!("Removing process started...");
+
                     msg!("Checking that the address actually exist in the whitelist");
+
                     let check_ctx = ctx.accounts.check_ctx().with_signer(signer);
                     match whitelist::cpi::check_address(check_ctx, wallet.key()){
 
                         Ok(()) =>{
                                     let remove_ctx = ctx.accounts.remove_wallet_ctx().with_signer(signer);
                                     let _ = whitelist::cpi::remove_address(remove_ctx, wallet);
+
                                     msg!("-1 to the counter...");
-                                    ctx.accounts.counter.count = count.checked_sub(1).unwrap();
+
+                                        ctx.accounts.counter.count = count.checked_sub(1).unwrap();
+
                                      Ok(())
                                  }
+
                         Err(e) => Err(e),
                                     
                     }
                     },
 
             false => {
-                    msg!("Removing process started...");
-                    let add_ctx = ctx.accounts.adding_new_wallet_ctx().with_signer(signer);
-                    let _ = whitelist::cpi::add_address(add_ctx, wallet);
+
+                    msg!("Adding process started...");
+
+                        let add_ctx = ctx.accounts.adding_new_wallet_ctx().with_signer(signer);
+                        let _ = whitelist::cpi::add_address(add_ctx, wallet);
+
                     msg!("+1 to the counter...");
-                    ctx.accounts.counter.count = count.checked_add(1).unwrap();
+
+                        ctx.accounts.counter.count = count.checked_add(1).unwrap();
+
                     Ok(())
                     } 
                   
