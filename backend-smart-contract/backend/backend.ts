@@ -26,10 +26,14 @@ var initialized_pointing= false;
 var called_initialized = false;
 var new_string = null;
 const wallet = provider.wallet;
-const testNftTitle = "Massage";
-const testNftSymbol = "SOLANAHH";
-const testNftUri = "https://raw.githubusercontent.com/rudranshsharma123/Certificate-Machine/main/JSON-Files/CLEON.json";
-// const address_to_send = "CmZjvm2KJX4gJiyWimTxGEW4FtXRq6fnKtNJxTnTu7uK";
+const testNftTitle = ["Holana","Hoolana","Hooolana","Hoooolana","Hooooolana"];
+const testNftSymbol = ["Holana","Holana","Holana","Holana","Holana"];
+const testNftUri = ["https://raw.githubusercontent.com/rudranshsharma123/Certificate-Machine/main/JSON-Files/CLEON.json",
+                  "https://raw.githubusercontent.com/rudranshsharma123/Certificate-Machine/main/JSON-Files/CLEON.json",
+                  "https://raw.githubusercontent.com/rudranshsharma123/Certificate-Machine/main/JSON-Files/CLEON.json",
+                  "https://raw.githubusercontent.com/rudranshsharma123/Certificate-Machine/main/JSON-Files/CLEON.json",
+                  "https://raw.githubusercontent.com/rudranshsharma123/Certificate-Machine/main/JSON-Files/CLEON.json"];
+
 const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s");
 const arr = Object.values(kp._keypair.secretKey);
 const secret = new Uint8Array(arr);
@@ -37,7 +41,7 @@ const authority = anchor.web3.Keypair.fromSecretKey(secret);
 const arr2 = Object.values(kp2._keypair.secretKey);
 const secret2 = new Uint8Array(arr2);
 const whitelist = anchor.web3.Keypair.fromSecretKey(secret2);
-// const whitelist = anchor.web3.Keypair.generate();
+
 
 
 async function airdrop(connection, destinationWallet, amount) {
@@ -138,6 +142,7 @@ const add_to_whitelist = async(new_account) =>{
       let counter = await CounterProgram.account.counter.fetch(counterPDA);
       console.log("Adding", account_new.toString(), "to the whitelist");
       console.log(counter.count.toNumber());
+      mint_iteration();
 
   }catch(e){
       
@@ -160,10 +165,11 @@ const getData = async() =>{
                  }
                 }
     );
+    console.log(new_string);
 }
 
 const interval = setInterval(() => {
-    // script_function();
+
     if ((initialized_counter== false || initialized_pointing==false) && called_initialized== false){
         init_whitelisting();
         called_initialized = true;
@@ -174,8 +180,6 @@ const interval = setInterval(() => {
         && new_string != undefined){
 
           add_to_whitelist(new_string);
-
-          console.log(new_string);
           array.push(new_string);
          
     }
@@ -184,6 +188,17 @@ const interval = setInterval(() => {
     
 }, 1000);
 const mint_iteration = async () => {
+
+  let position = 0;
+
+  for (var i = 0; i < testNftTitle.length; i++) {
+
+    
+    position = i;
+
+    mint_process(testNftTitle[i], testNftSymbol[i], testNftUri[i], new_string);
+  
+}
 
 }
 
