@@ -61,9 +61,10 @@ const init_whitelisting = async() =>{
 
     console.log("Initializing the whitelist 📩📍!")
     console.log("....")
-    console.log(".......")
-    console.log(".........")
+
     await airdrop(provider.connection, authority,1);
+    console.log("Airdrop to whitelist authority completed\n")
+    console.log("...........................................")
     await new Promise(f => setTimeout(f,1000));
 
     [counterPDA, counterBump]= await anchor.web3.PublicKey.findProgramAddress(
@@ -75,6 +76,8 @@ const init_whitelisting = async() =>{
     );
  
   try{
+    console.log("Creating counter....");
+    console.log(".....");
     await CounterProgram.methods
           .initCounter(counterBump)
           .accounts({
@@ -84,15 +87,16 @@ const init_whitelisting = async() =>{
           })
           .signers([authority])
           .rpc();
-          console.log("New counter created!");
+          console.log("\x1b[32m","New counter created!");
           initialized_counter=true;
         
   }catch(_){
-    console.log("✘ Counter has already been initialized");
+    console.log("\x1b[31m","✘ Counter has already been initialized");
     initialized_counter = true;
   }
   try{
-
+    console.log("\x1b[0m","Pointing the counter to whitelist....");
+    console.log(".....");
     await CounterProgram.methods
     .pointToWhitelist()
     .accounts({
@@ -104,14 +108,15 @@ const init_whitelisting = async() =>{
     })
     .signers([authority, whitelist])
     .rpc();
-    console.log("Count has successful pointed to the whitelist!!");
+    console.log("\x1b[32m","Count has successful pointed to the whitelist!!");
+   
     initialized_pointing=true;
   }catch(_){
-    console.log("✘ Whitelist has already been pointed");
+    console.log("\x1b[31m","✘ Whitelist has already been pointed");
     initialized_pointing = true;
   }
   let counter = await CounterProgram.account.counter.fetch(counterPDA);
-  console.log(counter.count.toNumber());
+  console.log("\x1b[0m","The default count for this whitelist is:", counter.count.toNumber());
 }
 const add_to_whitelist = async(new_account) =>{
  
@@ -141,7 +146,7 @@ const add_to_whitelist = async(new_account) =>{
       
       let counter = await CounterProgram.account.counter.fetch(counterPDA);
       console.log("Adding", account_new.toString(), "to the whitelist");
-      console.log(counter.count.toNumber());
+      console.log("Number of people in the whitelist:", counter.count.toNumber(),"\n");
       mint_iteration();
 
   }catch(e){
@@ -162,6 +167,7 @@ const getData = async() =>{
     .then(res => res.text())
     .then(res =>{ if ((array.includes(res) == false) && res.length>40){
                  new_string = res.replace(/"/g,""); 
+                
                  }
                 }
     );
