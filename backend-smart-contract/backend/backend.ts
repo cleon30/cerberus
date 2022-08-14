@@ -107,17 +107,13 @@ const init_whitelisting = async() =>{
     console.log("✘ Whitelist has already been pointed");
     initialized_pointing = true;
   }
-    let counter = await CounterProgram.account.counter.fetch(counterPDA);
-    console.log(counter.count);
+  let counter = await CounterProgram.account.counter.fetch(counterPDA);
+  console.log(counter.count.toNumber());
 }
 const add_to_whitelist = async(new_account) =>{
  
-  console.log(new_account.replace(/"/g,""));
-//   console.log("CTu7F93hJAEHzFkyuY6aeE8RYNabAsG1ttArtLMyh2ky");
-// console.log(new_account.replace(/"/g,"") == "CTu7F93hJAEHzFkyuY6aeE8RYNabAsG1ttArtLMyh2ky")
-
   try{
-    const account_new = new PublicKey(new_account.replace(/"/g,""));
+    const account_new = new PublicKey(new_account);
 
     let [PDA, _] = await anchor.web3.PublicKey.findProgramAddress(
       [whitelist.publicKey.toBuffer(), account_new.toBuffer()],
@@ -139,9 +135,10 @@ const add_to_whitelist = async(new_account) =>{
         .signers([authority])
         .rpc();
 
-      console.log("everything good lol");
+      
       let counter = await CounterProgram.account.counter.fetch(counterPDA);
-      console.log(counter.count);
+      console.log("Adding", account_new.toString(), "to the whitelist");
+      console.log(counter.count.toNumber());
   }catch(e){
       
       let counter = await CounterProgram.account.counter.fetch(counterPDA);
@@ -159,7 +156,7 @@ const getData = async() =>{
     fetch('http://127.0.0.1:8000/data/last')
     .then(res => res.text())
     .then(res =>{ if ((array.includes(res) == false) && res.length==46){
-                 new_string = res; 
+                 new_string = res.replace(/"/g,""); 
                  }
                 }
     );
