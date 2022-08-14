@@ -48,7 +48,7 @@ async function airdrop(connection, destinationWallet, amount) {
   });
 }
 
-const init = async() =>{
+const init_whitelisting = async() =>{
 
     console.log("Initializing!")
     await airdrop(provider.connection, authority,1);
@@ -118,7 +118,7 @@ const getData = async() =>{
 const interval = setInterval(() => {
     // script_function();
     if ((initialized_counter== false || initialized_pointing==false) && called_initialized== false){
-        init();
+        init_whitelisting();
         called_initialized = true;
     }
     if (array.includes(new_string)== false && new_string != undefined){
