@@ -5,11 +5,11 @@ import { Keypair, PublicKey } from "@solana/web3.js";
 
 	// Configure the client to use the local cluster.
 
-	
+const provider = anchor.AnchorProvider.env();
 // Configure the client to use the local cluster.
 anchor.setProvider(anchor.AnchorProvider.env());
 const MinterProgram = anchor.workspace.Minter as Program<Minter>;
-const provider = anchor.AnchorProvider.env();
+
 const wallet = provider.wallet;
 const testNftTitle = "Massage";
 const testNftSymbol = "SOLANAHH";
@@ -21,7 +21,7 @@ const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey(
 	"metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s",
 );
 
-const process =  async (title, symbol, json_url, address_recipient) => {
+const mint_process =  async (title, symbol, json_url, address_recipient) => {
 
 	const buyer = new PublicKey(address_recipient);
 	const mint = Keypair.generate();
@@ -98,7 +98,10 @@ const process =  async (title, symbol, json_url, address_recipient) => {
 
 	}catch(e){
 				// await new Promise(f => setTimeout(f, 300))
-				process(title, symbol, json_url, address_to_send);
+				mint_process(title, symbol, json_url, address_to_send);
 	}
 }
-process(testNftTitle, testNftSymbol, testNftUri, address_to_send);
+it("testing::", async()=>{
+	mint_process(testNftTitle, testNftSymbol, testNftUri, address_to_send);
+})
+
