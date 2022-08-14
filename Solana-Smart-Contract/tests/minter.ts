@@ -16,12 +16,12 @@ const testNftSymbol = "BETA";
 const testNftUri =
 	"https://raw.githubusercontent.com/rudranshsharma123/Certificate-Machine/main/JSON-Files/CLEON.json";
 
-const buyer = new PublicKey("4mDqXYgn4y5D4CYnDPCE46xFNmrZwoRz3FtNihexRBFz");
+const buyer = new PublicKey("CmZjvm2KJX4gJiyWimTxGEW4FtXRq6fnKtNJxTnTu7uK");
 const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey(
 	"metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s",
 );
 
-const process =  async (title,symbol, json_url) => {
+const process =  async (title, symbol, json_url) => {
 	
 	
 	const mint = Keypair.generate();
@@ -103,7 +103,7 @@ const process =  async (title,symbol, json_url) => {
 
 	}catch(e){
 				// await new Promise(f => setTimeout(f, 300))
-				process(title,symbol, json_url);
+				process(title, symbol, json_url);
 	}
 }
 process(testNftTitle, testNftSymbol, testNftUri);
