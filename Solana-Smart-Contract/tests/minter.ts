@@ -84,11 +84,6 @@ const process =  async (title, symbol, json_url) => {
 				mint: mint.publicKey,
 				owner: buyer,
 			});
-			// console.log(`Request to sell NFT: ${mint} for ${saleAmount} lamports.`);
-			console.log(`Owner's Token Address: ${ownerTokenAddress}`);
-			console.log(`Buyer's Token Address: ${buyerTokenAddress}`);
-
-			// Transact with the "sell" function in our on-chain program
 
 			await program.methods
 				.send()
