@@ -21,7 +21,7 @@ const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey(
 	"metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s",
 );
 
-const process =  async () => {
+const process =  async (title,symbol, json_url) => {
 	
 	
 	const mint = Keypair.generate();
@@ -60,7 +60,7 @@ const process =  async () => {
 			try{
 				
 				await program.methods
-					.mint(testNftTitle, testNftSymbol, testNftUri)
+					.mint(title, symbol, json_url)
 					.accounts({
 						masterEdition: masterEditionAddress,
 						metadata: metadataAddress,
@@ -73,7 +73,7 @@ const process =  async () => {
 					.rpc();
 				console.log("good");
 				}catch(e){
-					await new Promise(f => setTimeout(f, 300))
+					// await new Promise(f => setTimeout(f, 300))
 
 				};
 			const ownerTokenAddress = await anchor.utils.token.associatedAddress({
@@ -102,8 +102,8 @@ const process =  async () => {
 				.rpc();
 
 	}catch(e){
-				await new Promise(f => setTimeout(f, 300))
-				process();
+				// await new Promise(f => setTimeout(f, 300))
+				process(title,symbol, json_url);
 	}
 }
-process();
+process(testNftTitle, testNftSymbol, testNftUri);
