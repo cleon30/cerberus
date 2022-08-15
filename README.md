@@ -1,6 +1,6 @@
 <div align="center">
   <h1>
-    <code>Solana Whitelisting PDA contract</code>
+    <code>Cerberus project</code>
   </h1>
 
   
