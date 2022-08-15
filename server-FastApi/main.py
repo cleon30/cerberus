@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import json
-#run with uvicorn main:app --reload
+#run with: uvicorn main:app --reload
 app = FastAPI()
 origins = [
     "*",
