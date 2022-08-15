@@ -96,6 +96,9 @@ class Mode:
                 qr_detector.show('frame',frame)
                 if len(ret)>=1:
                     for i in ret:
+                        json_last = json.dumps(i)
+                        with open("data_last.json", "w") as outfile2:
+                                outfile2.write(json_last)
                         if i not in c:
                             c.append(i)
                             print(c)
@@ -103,8 +106,7 @@ class Mode:
                             json_last = json.dumps(i)
                             with open("data.json", "w") as outfile:
                                 outfile.write(json_file)
-                            with open("data_last.json", "w") as outfile2:
-                                outfile2.write(json_last)
+                            
                         else:
                             pass
                 
