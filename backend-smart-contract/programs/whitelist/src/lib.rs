@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-declare_id!("EpsbCmDJTV9XHKmeoJb1bQNUtfw6rEKVuGiDXUXJ6YS8");
+declare_id!("6BCmsTQVx8TYEBUATyDqeE1UUkxy45U9y5PWuPefs9Jy");
 
 const DISCRIMINATOR_LENGTH: usize = 8;
 const PUBKEY_LENGTH: usize = 32;
@@ -19,15 +19,15 @@ pub mod whitelist {
 
         Ok(())
     }
-    pub fn add_address(_ctx: Context<AddAddress>, wallet: Pubkey) -> Result<()> {
+    pub fn add_address(_ctx: Context<AddAddress>, _wallet: Pubkey) -> Result<()> {
 
-        msg!("Adding address: {}", wallet);
+        msg!("Adding address...");
 
         Ok(())
     }
-    pub fn remove_address(_ctx: Context<RemoveAddress>, wallet: Pubkey) -> Result<()> {
+    pub fn remove_address(_ctx: Context<RemoveAddress>, _wallet: Pubkey) -> Result<()> {
 
-        msg!("Removing address: {}", wallet);
+        msg!("Removing address...");
 
         Ok(())
     }
