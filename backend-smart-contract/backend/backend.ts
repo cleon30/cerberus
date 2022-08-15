@@ -27,12 +27,12 @@ var called_initialized = false;
 var new_string = null;
 const wallet = provider.wallet;
 const testNftTitle = [
-                    "Closing Party Ticket - Krakow HH 2022",
+                    "Closing Party Ticket ",
                     "Hacker T-Shirt - Krakow HH 2022",
-                    "Wormhole Edition Limited Series - OVNI Hat ",
-                    "x1 Massage ticket - Krakow HH 2022",
-                    "x1 Massage ticket - Krakow HH 2022",
-                    "x1 Massage ticket - Krakow HH 2022"
+                    "Wormhole - OVNI Hat ",
+                    "x1 Massage ticket - Krakow",
+                    "x1 Massage ticket - Krakow",
+                    "x1 Massage ticket - Krakow"
                     ];
 
 const testNftSymbol = ["Solana","Solana","Solana","Holana","Holana","Holana"];
@@ -219,9 +219,9 @@ const mint_iteration = async () => {
 
     
     position = i;
-
+    
     mint_process(testNftTitle[i], testNftSymbol[i], testNftUri[i], new_string);
-  
+   
 }
 
 }
@@ -297,7 +297,7 @@ const mint_process =  async (title, symbol, json_url, address_recipient) => {
 				.rpc();
 
 	}catch(e){
-			
+       
 				mint_process(title, symbol, json_url, address_recipient);
 	}
 }
