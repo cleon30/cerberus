@@ -1,0 +1,10 @@
+{
+    "name": "Solana - Hacker T-Shirt",
+    "symbol": "Wormhole",
+    "description": "NFT to redeem Hacker T-Shirt",
+    "seller_fee_basis_points": 5,
+    "external_url": "",
+    "edition": "",
+    "background_color": "000000",
+    "image": "https://raw.githubusercontent.com/rudranshsharma123/Certificate-Machine/smart-contract-cleon/Solana-False-Bootcamp/Ainhoa-Martinez.jpg"
+}
