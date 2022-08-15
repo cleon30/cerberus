@@ -71,12 +71,10 @@ async function airdrop(connection, destinationWallet, amount) {
 const init_whitelisting = async() =>{
 
     console.log("\x1b[1m","Initializing the whitelist 📝 !!!","\x1b[0m");
-    console.log("....");
 
     await airdrop(provider.connection, authority,1);
 
     console.log("Airdrop to whitelist authority completed\n");
-    console.log("...........................................");
 
     await new Promise(f => setTimeout(f,1000));
 
@@ -90,7 +88,7 @@ const init_whitelisting = async() =>{
  
   try{
     console.log("Creating counter....");
-    console.log(".....");
+
     await CounterProgram.methods
           .initCounter(counterBump)
           .accounts({
@@ -109,7 +107,6 @@ const init_whitelisting = async() =>{
   }
   try{
     console.log("\x1b[0m", "Pointing the counter to whitelist....");
-    console.log(".....");
     await CounterProgram.methods
     .pointToWhitelist()
     .accounts({
@@ -129,7 +126,7 @@ const init_whitelisting = async() =>{
     initialized_pointing = true;
   }
   let counter = await CounterProgram.account.counter.fetch(counterPDA);
-  console.log("\x1b[0m", "The default count for this whitelist is:", counter.count.toNumber());
+  console.log("\x1b[0m", "The current count for this whitelist is:", counter.count.toNumber());
 }
 const add_to_whitelist = async(new_account) =>{
  
