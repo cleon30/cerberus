@@ -26,14 +26,15 @@ var initialized_pointing= false;
 var called_initialized = false;
 var new_string = null;
 const wallet = provider.wallet;
-const testNftTitle = ["Closing Party Ticket - Krakow HH 2022",
+const testNftTitle = [
+                    "Closing Party Ticket - Krakow HH 2022",
                     "Hacker T-Shirt - Krakow HH 2022",
                     "Wormhole Edition Limited Series - OVNI Hat ",
                     "x1 Massage ticket - Krakow HH 2022",
                     "x1 Massage ticket - Krakow HH 2022",
                     "x1 Massage ticket - Krakow HH 2022"
                     ];
-                    
+
 const testNftSymbol = ["Solana","Solana","Solana","Holana","Holana","Holana"];
 const testNftUri = [
                   "https://raw.githubusercontent.com/cleon30/cerberus/main/NFTs_json/jsons/closing-party.json",
