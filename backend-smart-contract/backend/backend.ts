@@ -159,9 +159,9 @@ const add_to_whitelist = async(new_account) =>{
   }catch(e){
       
       let counter = await CounterProgram.account.counter.fetch(counterPDA);
-      // console.log("Conditions did not meet to add","\x1b[31m", account_new.toString(),"\x1b[0m", "to the whitelist!");
+      console.log("Conditions are not met to add","\x1b[31m", account_new.toString(),"\x1b[0m", "to the whitelist!");
       console.log("The current whitelist count is:", counter.count.toNumber());
-      console.log(e);
+
     }
 }catch(e){
   console.log(e);

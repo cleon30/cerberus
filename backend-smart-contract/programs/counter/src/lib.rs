@@ -83,7 +83,7 @@ pub mod counter {
                         Err(e) => Err(e),
                                     
                     }
-                    },
+            },
 
             false => {
 
@@ -97,10 +97,9 @@ pub mod counter {
                         ctx.accounts.counter.count = count.checked_add(1).unwrap();
 
                     Ok(())
-                    } 
-                  
                     
-       
+            } 
+            
         }
     }
 }
