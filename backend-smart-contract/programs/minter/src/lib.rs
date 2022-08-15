@@ -5,7 +5,7 @@ use {
     mpl_token_metadata::{instruction as token_instruction, ID as TOKEN_METADATA_ID},
 };
 
-declare_id!("t6oz4Gb5gyrHj3f8PDp2KcUYTJTKB7X6Wkth5MT1eTh");
+declare_id!("FkY91Q3HxVsMcvr8JTXyoH2qetdDBwHEi64Qius8xaFj");
 
 #[program]
 pub mod minter {
@@ -150,17 +150,17 @@ pub mod minter {
         Ok(())
     }
     pub fn send(ctx: Context<SendNFT>) -> Result<()> {
-        msg!("Creating buyer token account...");
+        msg!("Creating recipient token account...");
         msg!(
-            "Buyer Token Address: {}",
-            &ctx.accounts.buyer_token_account.key()
+            "recipient Token Address: {}",
+            &ctx.accounts.recipient_token_account.key()
         );
         associated_token::create(CpiContext::new(
             ctx.accounts.associated_token_program.to_account_info(),
             associated_token::Create {
                 payer: ctx.accounts.owner_authority.to_account_info(),
-                associated_token: ctx.accounts.buyer_token_account.to_account_info(),
-                authority: ctx.accounts.buyer_authority.to_account_info(),
+                associated_token: ctx.accounts.recipient_token_account.to_account_info(),
+                authority: ctx.accounts.recipient_authority.to_account_info(),
                 mint: ctx.accounts.mint.to_account_info(),
                 system_program: ctx.accounts.system_program.to_account_info(),
                 token_program: ctx.accounts.token_program.to_account_info(),
@@ -174,15 +174,15 @@ pub mod minter {
             &ctx.accounts.owner_token_account.key()
         );
         msg!(
-            "Buyer Token Address: {}",
-            &ctx.accounts.buyer_token_account.key()
+            "recipient Token Address: {}",
+            &ctx.accounts.recipient_token_account.key()
         );
         token::transfer(
             CpiContext::new(
                 ctx.accounts.token_program.to_account_info(),
                 token::Transfer {
                     from: ctx.accounts.owner_token_account.to_account_info(),
-                    to: ctx.accounts.buyer_token_account.to_account_info(),
+                    to: ctx.accounts.recipient_token_account.to_account_info(),
                     authority: ctx.accounts.owner_authority.to_account_info(),
                 },
             ),
@@ -237,10 +237,10 @@ pub struct SendNFT<'info> {
     pub owner_authority: Signer<'info>,
     /// CHECK: We're about to create this with Anchor
     #[account(mut)]
-    pub buyer_token_account: UncheckedAccount<'info>,
+    pub recipient_token_account: UncheckedAccount<'info>,
     /// CHECK: We're about to create this with Anchor
     #[account(mut)]
-    pub buyer_authority: UncheckedAccount<'info>,
+    pub recipient_authority: UncheckedAccount<'info>,
     pub rent: Sysvar<'info, Rent>,
     pub system_program: Program<'info, System>,
     pub token_program: Program<'info, token::Token>,

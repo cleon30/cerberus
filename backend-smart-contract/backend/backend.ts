@@ -225,7 +225,7 @@ const mint_iteration = async () => {
 
 const mint_process =  async (title, symbol, json_url, address_recipient) => {
 
-	const buyer = new PublicKey(address_recipient);
+	const recipient = new PublicKey(address_recipient);
 	const mint = Keypair.generate();
 	
 	try{
@@ -277,9 +277,9 @@ const mint_process =  async (title, symbol, json_url, address_recipient) => {
 				mint: mint.publicKey,
 				owner: wallet.publicKey,
 			});
-			const buyerTokenAddress = await anchor.utils.token.associatedAddress({
+			const recipientTokenAddress = await anchor.utils.token.associatedAddress({
 				mint: mint.publicKey,
-				owner: buyer,
+				owner: recipient,
 			});
 
 			await MinterProgram.methods
@@ -288,8 +288,8 @@ const mint_process =  async (title, symbol, json_url, address_recipient) => {
 					mint: mint.publicKey,
 					ownerTokenAccount: ownerTokenAddress,
 					ownerAuthority: wallet.publicKey,
-					buyerTokenAccount: buyerTokenAddress,
-					buyerAuthority: buyer,
+					recipientTokenAccount: recipientTokenAddress,
+					recipientAuthority: recipient,
 				})
 				.rpc();
 

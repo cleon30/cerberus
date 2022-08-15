@@ -5,7 +5,7 @@ use whitelist::cpi::accounts::{
 use crate::whitelist::Wallet;
 use whitelist::program::Whitelist;
 use whitelist::{self};
-declare_id!("2fBSBHygZCJapNRn9gX9BVYBZExmmcNi2X3WqUBRmGwZ");
+declare_id!("EnSmXRk54iXzsfYgVWdEHMRRJVTNoRr5JostVFJb3o6j");
 
 const DISCRIMINATOR_LENGTH: usize = 8;
 const PUBKEY_LENGTH: usize = 32;
@@ -97,7 +97,7 @@ pub mod counter {
                         ctx.accounts.counter.count = count.checked_add(1).unwrap();
 
                     Ok(())
-                    
+
             } 
             
         }
