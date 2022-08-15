@@ -114,7 +114,7 @@ const init_whitelisting = async() =>{
    
     initialized_pointing=true;
   }catch(_){
-    console.log("\x1b[31m", "✘ Whitelist has already been pointed");
+    console.log("\x1b[31m", "✘ Whitelist has already been pointed","\x1b[0m");
     initialized_pointing = true;
   }
   let counter = await CounterProgram.account.counter.fetch(counterPDA);
