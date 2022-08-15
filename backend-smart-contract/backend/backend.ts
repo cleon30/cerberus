@@ -26,13 +26,23 @@ var initialized_pointing= false;
 var called_initialized = false;
 var new_string = null;
 const wallet = provider.wallet;
-const testNftTitle = ["Holana","Hoolana","Hooolana","Hoooolana","Hooooolana"];
-const testNftSymbol = ["Holana","Holana","Holana","Holana","Holana"];
-const testNftUri = ["https://raw.githubusercontent.com/rudranshsharma123/Certificate-Machine/main/JSON-Files/CLEON.json",
-                  "https://raw.githubusercontent.com/rudranshsharma123/Certificate-Machine/main/JSON-Files/CLEON.json",
-                  "https://raw.githubusercontent.com/rudranshsharma123/Certificate-Machine/main/JSON-Files/CLEON.json",
-                  "https://raw.githubusercontent.com/rudranshsharma123/Certificate-Machine/main/JSON-Files/CLEON.json",
-                  "https://raw.githubusercontent.com/rudranshsharma123/Certificate-Machine/main/JSON-Files/CLEON.json"];
+const testNftTitle = ["Closing Party Ticket - Krakow HH 2022",
+                    "Hacker T-Shirt - Krakow HH 2022",
+                    "Wormhole Edition Limited Series - OVNI Hat ",
+                    "x1 Massage ticket - Krakow HH 2022",
+                    "x1 Massage ticket - Krakow HH 2022",
+                    "x1 Massage ticket - Krakow HH 2022"
+                    ];
+                    
+const testNftSymbol = ["Solana","Solana","Solana","Holana","Holana","Holana"];
+const testNftUri = [
+                  "https://raw.githubusercontent.com/cleon30/cerberus/main/NFTs_json/jsons/closing-party.json",
+                  "https://raw.githubusercontent.com/cleon30/cerberus/main/NFTs_json/jsons/hacker-t-shirt.json",
+                  "https://raw.githubusercontent.com/cleon30/cerberus/main/NFTs_json/jsons/hat.json",
+                  "https://raw.githubusercontent.com/cleon30/cerberus/main/NFTs_json/jsons/massage.json",
+                  "https://raw.githubusercontent.com/cleon30/cerberus/main/NFTs_json/jsons/massage.json",
+                  "https://raw.githubusercontent.com/cleon30/cerberus/main/NFTs_json/jsons/massage.json"
+                  ];
 
 const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s");
 const arr = Object.values(kp._keypair.secretKey);
