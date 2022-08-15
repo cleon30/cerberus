@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import json
+#run with uvicorn main:app --reload
 app = FastAPI()
 origins = [
     "*",
@@ -15,6 +16,6 @@ app.add_middleware(
 
 @app.get("/data/last")
 async def room():
-    with open('../data_last.json') as json_file2:
+    with open('../QR-python-API-darknet/data_last.json') as json_file2:
         data2 = json.load(json_file2)
     return data2
