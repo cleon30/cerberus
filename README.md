@@ -54,10 +54,13 @@ Everything with Smart Contracts.
 Once the wallet is whitelisted, we will have the option to instantly send NFTs to this user, so he/she could be able to redeem these NFTs inside the event.
 
 
-<img width="1012" alt="image" src="https://user-images.githubusercontent.com/62452212/184901930-c50deae1-de14-4a01-870c-d9d728521e07.png">
+<img width="800" alt="image" src="https://user-images.githubusercontent.com/62452212/184901930-c50deae1-de14-4a01-870c-d9d728521e07.png">
 
-## **Install**
+## **Video Demo**
 
+[![Watch the video](https://raw.githubusercontent.com/cleon30/cerberus/main/NFTs_json/images/video.png)](https://www.youtube.com/watch?v=tE3eFMNeNOg)
+
+https://www.youtube.com/watch?v=tE3eFMNeNOg
 1. [ ] Python libraries ```bash
 hello
 ```
