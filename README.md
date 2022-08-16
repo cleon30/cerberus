@@ -118,7 +118,7 @@ You will be running the entire process in 3 shells: Python AI QR Scan + Python s
 
 ### Running Python AI QR Scan
 
-Considering that you already have EpocCam Pro/"Your IP App" ready, you only will need to executre in the shell:
+Considering that you already have EpocCam Pro/"Your IP App" ready, you only will need to execute in the shell:
 ```bash
 cd QR-python-API-darknet && python3 main.py
 ```
@@ -129,6 +129,21 @@ cd QR-python-API-darknet && python3 main.py
 cd server-FastApi && uvicorn main:app --reload
 ```
 
+### Running the Typescript Backend 
+
+Before running the backend, please make sure the "../keypair.json" and "../keypair_whitelist.json" are actually the Keypairs you want to store the info.
+I created a Javascript script to generate them in case you want to get new ones.  Just running:```node createKeypair.js``` inside the backend folder.
+
+Completed the Keypair step, you are ready to run the backend!
+
+Running the backend:
+```bash
+anchor run backend
+```
+
+## Tests
+
+I have been testing the Anchor programs, setting different cases 
 
 
 
