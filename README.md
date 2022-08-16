@@ -89,7 +89,7 @@ cd backend-smart-contract
 npm i
 ```
 
+## Installation of the IP Camera
 
-### Typescript Dependencies
-and 3rd party App to use IP Cameras on your network(in my case I used EpocCam Pro).
+Ok, this is a tricky part because the path to follow depends on the OS of your computer that you will use to run the Python. In my case I am using macOS in the computer + iPadOS in the IP Camera, and for that reason I am using a 3rd Party called EpocCam Pro, that you could find in the Apple Store. So, this path is actually your chocie. 
 
