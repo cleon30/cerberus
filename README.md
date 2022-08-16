@@ -43,7 +43,9 @@ This Whitelisting Contract is an on-chain program, designed to store wallets usi
 Everything with Smart Contracts.
 
 
-<img width="250" alt="PDAs" src="https://user-images.githubusercontent.com/62452212/184901630-a14401d6-aff6-4587-8ed1-6c9847ef458c.png">![4B8551E5-79BD-414C-BF06-98930AF277F6](https://user-images.githubusercontent.com/62452212/184904068-c4702c02-3780-4905-b8cb-24cf7429bbdd.jpeg)
+<img width="250" alt="PDAs" src="https://user-images.githubusercontent.com/62452212/184901630-a14401d6-aff6-4587-8ed1-6c9847ef458c.png"><img width="250" alt="Captura de Pantalla 2022-08-16 a las 16 25 31" src="https://user-images.githubusercontent.com/62452212/184904471-2bc3ad9a-3c1c-4e9f-b179-14c4ede59c15.png">
+
+
 
 
 Once the wallet is whitelisted, we will have the option to instantly send NFTs to this user, so he/she could be able to redeem these NFTs inside the event.
