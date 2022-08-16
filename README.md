@@ -58,7 +58,7 @@ Once the wallet is whitelisted, we will have the option to instantly send NFTs t
 
 ## **Video Demo**
 
-[![Watch the video]img width="200"(https://raw.githubusercontent.com/cleon30/cerberus/main/NFTs_json/images/video.png)](https://www.youtube.com/watch?v=tE3eFMNeNOg)
+[![Watch the video](https://raw.githubusercontent.com/cleon30/cerberus/main/NFTs_json/images/video.png)](https://www.youtube.com/watch?v=tE3eFMNeNOg)
 
 https://www.youtube.com/watch?v=tE3eFMNeNOg
 1. [ ] Python libraries ```bash
