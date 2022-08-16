@@ -5,7 +5,7 @@
 
   
    <sub>
-    Built in Solana using Anchor and 🦀  <a href="https://solana.com/es" target="_blank">Solana</a>
+    Built in Solana using 🦀,🐍,.ts and Anchor  <a href="https://solana.com/es" target="_blank">Solana</a>
      
   </sub>
   
