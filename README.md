@@ -1,6 +1,6 @@
 <div align="center">
   <h1>
-    <code>Cerberus project</code>
+    <code>Project Cerberus</code>
   </h1>
 
   
