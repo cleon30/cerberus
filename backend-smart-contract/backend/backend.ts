@@ -1,5 +1,5 @@
 import * as anchor from "@project-serum/anchor";
-import {Program } from "@project-serum/anchor";
+import { Program } from "@project-serum/anchor";
 
 import { Counter } from "../target/types/counter";
 import { Whitelist } from "../target/types/whitelist";
@@ -35,7 +35,7 @@ const testNftTitle = [
                     "x1 Massage ticket - Krakow"
                     ];
 
-const testNftSymbol = ["Solana","Solana","Solana","Holana","Holana","Holana"];
+const testNftSymbol = ["Solana", "Solana", "Solana", "Holana", "Holana", "Holana"];
 const testNftUri = [
                   "https://raw.githubusercontent.com/cleon30/cerberus/main/NFTs_json/jsons/closing-party.json",
                   "https://raw.githubusercontent.com/cleon30/cerberus/main/NFTs_json/jsons/hacker-t-shirt.json",
@@ -70,9 +70,9 @@ async function airdrop(connection, destinationWallet, amount) {
 
 const init_whitelisting = async() =>{
 
-    console.log("\x1b[1m","Initializing the whitelist 📝 !!!","\x1b[0m");
+    console.log("\x1b[1m", "Initializing the whitelist 📝 !!!", "\x1b[0m");
 
-    await airdrop(provider.connection, authority,1);
+    await airdrop(provider.connection, authority, 1);
 
     console.log("Airdrop to whitelist authority completed\n");
 
@@ -99,7 +99,7 @@ const init_whitelisting = async() =>{
           .signers([authority])
           .rpc();
           console.log("\x1b[32m", "New counter created!");
-          initialized_counter=true;
+          initialized_counter = true;
         
   }catch(_){
     console.log("\x1b[31m", "✘ Counter has already been initialized");
@@ -120,7 +120,7 @@ const init_whitelisting = async() =>{
     .rpc();
     console.log("\x1b[32m", "Count has successful pointed to the whitelist!!");
    
-    initialized_pointing=true;
+    initialized_pointing = true;
   }catch(_){
     console.log("\x1b[31m", "✘ Whitelist has already been pointed","\x1b[0m");
     initialized_pointing = true;
@@ -133,7 +133,7 @@ const add_to_whitelist = async(new_account) =>{
   try{
 
     console.log("\n----------------");
-    console.log("\x1b[1m","Address Received, starting the process..!!\n","\x1b[0m");
+    console.log("\x1b[1m", "Address Received, starting the process..!!\n", "\x1b[0m");
 
     const account_new = new PublicKey(new_account);
 
@@ -160,14 +160,14 @@ const add_to_whitelist = async(new_account) =>{
 
       
       let counter = await CounterProgram.account.counter.fetch(counterPDA);
-      console.log("The address", "\x1b[32m", account_new.toString(),"\x1b[0m", "has been added to the whitelist!");
+      console.log("The address", "\x1b[32m", account_new.toString(), "\x1b[0m", "has been added to the whitelist!");
       console.log("Number of people in the whitelist:", counter.count.toNumber());
       mint_iteration();
 
   }catch(e){
       
       let counter = await CounterProgram.account.counter.fetch(counterPDA);
-      console.log("Conditions are not met to add","\x1b[31m", account_new.toString(),"\x1b[0m", "to the whitelist!");
+      console.log("Conditions are not met to add", "\x1b[31m", account_new.toString(), "\x1b[0m", "to the whitelist!");
       console.log("The current whitelist count is:", counter.count.toNumber());
 
     }
@@ -191,12 +191,12 @@ const getData = async() =>{
 
 const interval = setInterval(() => {
     getData();
-    if ((initialized_counter== false || initialized_pointing==false) && called_initialized== false){
+    if ((initialized_counter == false || initialized_pointing == false) && called_initialized == false){
         init_whitelisting();
         called_initialized = true;
     }
   
-    if ((initialized_counter== true && initialized_pointing==true) 
+    if ((initialized_counter == true && initialized_pointing == true) 
         && array.includes(new_string)== false 
         && new_string != undefined){
 
@@ -209,7 +209,7 @@ const interval = setInterval(() => {
     
 }, 300);
 const mint_iteration = async () => {
-  console.log("\x1b[32m","Minting Process has begun!!","\x1b[0m");
+  console.log("\x1b[32m", "Minting Process has begun!!", "\x1b[0m");
   let position = 0;
 
   for (var i = 0; i < testNftTitle.length; i++) {
@@ -270,7 +270,7 @@ const mint_process =  async (title, symbol, json_url, address_recipient) => {
 					.signers([mint])
 					.rpc();
 
-				console.log(title,"has been minted to:","\x1b[32m",address_recipient,"\x1b[0m");
+				console.log(title, "has been minted to:", "\x1b[32m", address_recipient, "\x1b[0m");
 
 			
 			const ownerTokenAddress = await anchor.utils.token.associatedAddress({
