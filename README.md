@@ -144,7 +144,28 @@ anchor run backend
 
 ## Tests
 
-I have been testing the Anchor programs, setting different cases 
+For testing the Smart Contracts I have used multiple cases, with different parameters and situations when calling the functions.
+In the project you will find 3 tests inside the test directory. You will be able to run all them with ```anchor run test``` . 
 
+### Testing the Whitelist
 
+```bash
+anchor run whitelist
+```
+<img width="505" alt="image" src="https://user-images.githubusercontent.com/62452212/184933813-ee4095dd-be8b-42c5-9f2c-e86e64b284b8.png">
+
+### Testing the Counter
+
+```bash
+anchor run counter
+```
+<img width="679" alt="image" src="https://user-images.githubusercontent.com/62452212/184934015-816a72fc-fb2f-497f-8091-fc0307a29f80.png">
+
+### Testing the Minter
+
+```bash
+anchor run minter
+```
+
+<img width="565" alt="image" src="https://user-images.githubusercontent.com/62452212/184934341-d421fcc3-a226-4c47-b422-8bd7d373d774.png">
 
