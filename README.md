@@ -39,7 +39,7 @@ Once obtained the wallet, our backend will immediately whitelist this PublicKey 
 This Whitelisting Contract is an on-chain program, designed to store wallets using PDAs.  Also, a counter will be integrated in another program to know the number of wallets stored.
 
 Everything with Smart Contracts.
-<img width="639" alt="PDAs" src="https://user-images.githubusercontent.com/62452212/184901630-a14401d6-aff6-4587-8ed1-6c9847ef458c.png">
+<img width="250" alt="PDAs" src="https://user-images.githubusercontent.com/62452212/184901630-a14401d6-aff6-4587-8ed1-6c9847ef458c.png">
 
 Once the wallet is whitelisted, we will have the option to instantly send NFTs to this user, so he/she could be able to redeem these NFTs inside the event.
 <img width="1012" alt="image" src="https://user-images.githubusercontent.com/62452212/184901930-c50deae1-de14-4a01-870c-d9d728521e07.png">
