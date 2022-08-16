@@ -141,6 +141,9 @@ Running the backend:
 ```bash
 anchor run backend
 ```
+Backend Showcase:
+<img width="596" alt="image" src="https://user-images.githubusercontent.com/62452212/184938304-a8e186f2-7a7c-44b5-b55d-d8af5ae0cb12.png">
+
 
 ## Tests
 
