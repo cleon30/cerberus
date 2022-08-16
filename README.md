@@ -12,6 +12,7 @@
 </div>
 
 ## Description
+<img width="811" alt="Captura de Pantalla 2022-08-15 a las 17 23 23" src="https://user-images.githubusercontent.com/62452212/184806960-31ec2322-b66d-4ec4-848e-bf858a4ea21b.png">
 
 ![project-cerberus](https://user-images.githubusercontent.com/62452212/184583397-371cfd26-1634-4fea-90b2-99ff30cd463d.jpg)
 
