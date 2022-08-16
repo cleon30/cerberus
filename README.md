@@ -17,7 +17,7 @@
  
 ## **Introduction**
 
-Cerberus is an on-chain solution to improve web3 IRL experience
+Cerberus is an on-chain solution to improve web3 IRL experience.
 
 ## **Value Proposition**
 
