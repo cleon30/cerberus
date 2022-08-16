@@ -65,31 +65,31 @@ Once the wallet is whitelisted, we will have the option to instantly send NFTs t
 [![Watch the video](https://raw.githubusercontent.com/cleon30/cerberus/main/NFTs_json/images/video.png)](https://www.youtube.com/watch?v=tE3eFMNeNOg)
 
 https://www.youtube.com/watch?v=tE3eFMNeNOg
-1. [ ] Python libraries ```bash
-hello
-```
-2. [ ] Wallet Address
 
+## Installation
 
+You will have to install 3 main things: Python Dependencies and Typescript dependencies.
 
+### Python Dependencies
 
-
-
-## Description
-
-![project-cerberus](https://user-images.githubusercontent.com/62452212/184583397-371cfd26-1634-4fea-90b2-99ff30cd463d.jpg)
-
-
-The Solana Whitelisting PDA contract is an open-source tool for developers in the Solana ecosystem, enabling them to create an on-chain whitelisting solution as easier as possible. 
-
-## Installing Project & Dependencies 
-
-Set your config to localhost
 ```bash
-.
+cd QR-python-API-darknet
+pip3 install opencv-python pyzbar pandas tempfile json numpy
 ```
-Also if you don't have Anchor or npm or Solana, please follow these instructions: https://project-serum.github.io/anchor/getting-started/installation.html
+### Python Server Dependencies
 
-## Running
+```bash
+cd server-FastApi
+pip3 install fastapi
+```
+### Typescript dependencies
 
-0xCleon
+```bash
+cd backend-smart-contract
+npm i
+```
+
+
+### Typescript Dependencies
+and 3rd party App to use IP Cameras on your network(in my case I used EpocCam Pro).
+
