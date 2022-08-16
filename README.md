@@ -36,8 +36,7 @@ At the entrance of the event there will be an IP Camera transmitting video to ou
 These frames will be analyzed using Deep Learning , aiming to detect QR codes from wallets and decoding them to obtain the wallet PublicKey.
 
 
-<img width="181" alt="image" src="https://user-images.githubusercontent.com/62452212/184905686-ffe886a2-070f-47ef-b961-621815f44961.png">
-<img width="657" alt="image" src="https://user-images.githubusercontent.com/62452212/184901284-12d24782-5068-44cb-96a9-0f86fdf2c5d0.png">
+<img width="688" alt="image" src="https://user-images.githubusercontent.com/62452212/184906570-0a33083b-e107-4565-849d-b654d7849594.png">
 
 ## Project Description (II)
 
