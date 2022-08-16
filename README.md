@@ -65,6 +65,9 @@ Once the wallet is whitelisted, we will have the option to instantly send NFTs t
 [![Watch the video](https://raw.githubusercontent.com/cleon30/cerberus/main/NFTs_json/images/video.png)](https://www.youtube.com/watch?v=tE3eFMNeNOg)
 
 https://www.youtube.com/watch?v=tE3eFMNeNOg
+## High Level Structure
+
+![image](https://user-images.githubusercontent.com/62452212/184989580-a72ff275-ce22-42f9-8914-96eeee6ed1d9.png)
 
 ## Installation
 
