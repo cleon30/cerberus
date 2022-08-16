@@ -27,7 +27,9 @@ Cerberus has been designed to improve the user experience on events, being a per
 
 Also, this project is aiming to normalize the use of crypto in the society, being a good way to feel crypto more tangible than ever.
 
-## Project Description
+# Project Description
+
+## Project Description(I)
 
 At the entrance of the event there will be an IP Camera transmitting video to our local computer through WiFi.
 
@@ -35,6 +37,8 @@ These frames will be analyzed using Deep Learning , aiming to detect QR codes fr
 
 
 <img width="657" alt="image" src="https://user-images.githubusercontent.com/62452212/184901284-12d24782-5068-44cb-96a9-0f86fdf2c5d0.png">
+
+## Project Description(II)
 
 Once obtained the wallet, our backend will immediately whitelist this PublicKey on our Whitelisting Contract in Solana Blockchain.
 
@@ -45,8 +49,7 @@ Everything with Smart Contracts.
 
 <img width="120" alt="Captura de Pantalla 2022-08-16 a las 16 25 31" src="https://user-images.githubusercontent.com/62452212/184904471-2bc3ad9a-3c1c-4e9f-b179-14c4ede59c15.png">.         <img width="250" alt="PDAs" src="https://user-images.githubusercontent.com/62452212/184901630-a14401d6-aff6-4587-8ed1-6c9847ef458c.png">
 
-
-
+## Project Description(III)
 
 Once the wallet is whitelisted, we will have the option to instantly send NFTs to this user, so he/she could be able to redeem these NFTs inside the event.
 
