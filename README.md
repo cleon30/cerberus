@@ -105,6 +105,7 @@ You will need Solana and Anchor installed. Also, make sure you have more than 10
 
 In order to get the 10 SOL just run ```solana airdrop 2 ~/.config/solana/id.json``` 5 times until you get them.
 
+Having completed that, please execute this to build and deploy the anchor program:
 ```bash
 anchor build 
 anchor deploy
