@@ -68,7 +68,7 @@ https://www.youtube.com/watch?v=tE3eFMNeNOg
 
 ## Installation
 
-You will have to install 3 main things: Python Dependencies and Typescript dependencies.
+You will have to install 3 main things: Python Dependencies, Typescript dependencies and Anchor + Solana.
 
 ### Python Dependencies
 
@@ -89,7 +89,24 @@ cd backend-smart-contract
 npm i
 ```
 
+### Anchor & Solana
+
+To install Solana and Anchor follow this URL : https://book.anchor-lang.com/getting_started/installation.html
+
+
 ## Installation of the IP Camera
 
-Ok, this is a tricky part because the path to follow depends on the OS of your computer that you will use to run the Python. In my case I am using macOS in the computer + iPadOS in the IP Camera, and for that reason I am using a 3rd Party called EpocCam Pro, that you could find in the Apple Store. So, this path is actually your chocie. 
+Ok, this is a tricky part because the path to follow depends on the OS of your computer that you will use to run the Python. In my case I am using macOS in the computer + iPadOS in the IP Camera, and for that reason I am using a 3rd Party called EpocCam Pro, that you could find in the Apple Store. 
+
+
+## Building and deploying the App 
+
+You will need Solana and Anchor installed. Also, make sure you have more than 10.5 SOL in the wallet or it will fail.
+
+In order to get the 10 SOL just run ```solana airdrop 2 ~/.config/solana/id.json``` 5 times until you get them.
+
+```bash
+anchor build 
+anchor deploy
+```
 
