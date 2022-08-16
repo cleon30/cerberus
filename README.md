@@ -5,7 +5,7 @@
 
   
    <sub>
-    Built in Solana using 🦀 , 🐍 and  Anchor 
+    Built in Solana using 🦀 , 🐍 , Typescript and  Anchor 
      
   </sub>
   
