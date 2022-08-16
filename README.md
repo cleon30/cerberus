@@ -110,3 +110,25 @@ anchor build
 anchor deploy
 ```
 
+## Running 
+
+After you have installed all the dependencies, you are ready to run all the process.
+
+You will be running the entire process in 3 shells: Python AI QR Scan + Python server + Typescript Backend.
+
+### Running Python AI QR Scan
+
+Considering that you already have EpocCam Pro/"Your IP App" ready, you only will need to executre in the shell:
+```bash
+cd QR-python-API-darknet && python3 main.py
+```
+
+### Running the Python Server
+
+```bash
+cd server-FastApi && uvicorn main:app --reload
+```
+
+
+
+
