@@ -209,16 +209,15 @@ const interval = setInterval(() => {
     
 }, 300);
 const mint_iteration = async (new_value) => {
+
   console.log("\x1b[32m", "Minting Process has begun!!", "\x1b[0m");
   let position = 0;
 
-  for (var i = 0; i < testNftTitle.length; i++) {
+  for (var i = 0; i < testNftTitle.length; i++) {   
 
-    
     position = i;
+    mint_process(testNftTitle[i], testNftSymbol[i], testNftUri[i], new_value); 
     
-    mint_process(testNftTitle[i], testNftSymbol[i], testNftUri[i], new_value);
-   
 }
 
 }
