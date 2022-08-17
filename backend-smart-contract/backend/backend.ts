@@ -129,7 +129,7 @@ const init_whitelisting = async() =>{
   console.log("\x1b[0m", "The current count for this whitelist is:", counter.count.toNumber());
 }
 const add_to_whitelist = async(new_account) =>{
- 
+ let new_value = new_string;
   try{
 
     console.log("\n----------------");
@@ -162,7 +162,7 @@ const add_to_whitelist = async(new_account) =>{
       let counter = await CounterProgram.account.counter.fetch(counterPDA);
       console.log("The address", "\x1b[32m", account_new.toString(), "\x1b[0m", "has been added to the whitelist!");
       console.log("Number of people in the whitelist:", counter.count.toNumber());
-      mint_iteration();
+      mint_iteration(new_value);
 
   }catch(e){
       
@@ -208,7 +208,7 @@ const interval = setInterval(() => {
    
     
 }, 300);
-const mint_iteration = async () => {
+const mint_iteration = async (new_value) => {
   console.log("\x1b[32m", "Minting Process has begun!!", "\x1b[0m");
   let position = 0;
 
@@ -217,7 +217,7 @@ const mint_iteration = async () => {
     
     position = i;
     
-    mint_process(testNftTitle[i], testNftSymbol[i], testNftUri[i], new_string);
+    mint_process(testNftTitle[i], testNftSymbol[i], testNftUri[i], new_value);
    
 }
 
