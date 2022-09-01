@@ -2,10 +2,9 @@ use anchor_lang::prelude::*;
 use whitelist::cpi::accounts::{
     AddAddress, CheckAddress, NewWhitelist, RemoveAddress,
 };
-use crate::whitelist::Wallet;
 use whitelist::program::Whitelist;
 use whitelist::{self};
-declare_id!("EnSmXRk54iXzsfYgVWdEHMRRJVTNoRr5JostVFJb3o6j");
+declare_id!("3ye8VHCELuFpYsPDTMwx5F89qtDDbBpEU1KUfsE1MBN6");
 
 const DISCRIMINATOR_LENGTH: usize = 8;
 const PUBKEY_LENGTH: usize = 32;
@@ -170,28 +169,7 @@ pub struct AddOrRemove<'info> {
     authority: Signer<'info>,
     system_program: Program<'info, System>,
 }
-#[derive(Accounts)]
 
-pub struct UpdateCounter<'info> {
-    
-    #[account(
-        mut,
-        seeds = [
-                "counter".as_bytes().as_ref(),
-                authority.key().as_ref()
-                ],
-                bump,
-    )]
-    counter: Account<'info, Counter>,
-    pda_id: Account<'info, Wallet>,
-    wallet_address: Signer<'info>,
-    /// CHECK
-    whitelisting: AccountInfo<'info>,
-    update_id: Program<'info, Whitelist>,
-    /// CHECK
-    authority: AccountInfo<'info>,
-    system_program: Program<'info, System>,
-}
 // Data Structures
 #[account]
 pub struct Counter {

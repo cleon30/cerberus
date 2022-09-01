@@ -173,7 +173,7 @@ const add_to_whitelist = async(new_account) =>{
     }
 }catch(e){
   console.log(e);
-}
+ }
 }
 
 
